@@ -1,5 +1,5 @@
-**ProgrammingDanny is a chatbot I created with the goal of helping people with learning a programming language.**
+**ProgrammingDanny is a chatbot I created with the goal of helping people with learning JAVA.**
 
-It uses Dialogflow to process users' natural language, Firebase as its database and is put on Messenger to interact with people.
+The chatbot uses Facebook Messenger as its front-end tier, Dialogflow as its processing Tier for NLP and Firebase as its back-end fulfilment tier for storing functions and database.
 
-ProgrammingDanny is currently still under early development, I will share the code here when it is more mature.
+ProgrammingDanny is currently under development.
