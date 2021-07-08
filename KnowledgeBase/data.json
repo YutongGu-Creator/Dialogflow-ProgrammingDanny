@@ -1,0 +1,242 @@
+[
+    {
+        "level": "java_basics",
+        "name": "syntax",
+        "content": {
+            "description": [
+                "syntax",
+                "In our HelloWorld JAVA file http: //tpcg.io/HFFhfgZy, we created a programme that print \"Hello World\" to the screen.",
+                "Every line of code that runs in Java must be inside a class. In our example, we named the class Main. A class should always start with an uppercase first letter.",
+                "The main() method is required and you will see it in every Java program: public static void main(String[] args)",
+                "Any code inside the main() method will be executed.",
+                "Every Java program has a class name which must match the filename, and that every program must contain the main() method.",
+                "Inside the main() method, we can use the println() method to print a line of text to the screen: System.out.println(\"Hello World\");"
+            ]
+        }
+    },
+    {
+        "level": "java_basics",
+        "name": "comments",
+        "content": {
+            "description": [
+                "comments",
+                "Comments can be used to explain Java code, and to make it more readable. It can also be used to prevent execution when testing alternative code.",
+                "Single-line comments start with two forward slashes (//). Any text between // and the end of the line is ignored by Java (will not be executed).",
+                "Multi-line comments start with /* and ends with */. Any text between /* and */ will be ignored by Java.",
+                "Here are the examples http://tpcg.io/Q6FewAjX"
+            ]
+        }
+    },
+    {
+        "level": "java_basics",
+        "name": "variable",
+        "content": {
+            "description": [
+                "variable",
+                "Variables are containers for storing data values.",
+                "In Java, there are different types of variables, for example:",
+                "String - stores text, such as \"Hello\". String values are surrounded by double quotes",
+                "int - stores integers (whole numbers), without decimals, such as 123 or -123",
+                "float - stores floating point numbers, with decimals, such as 19.99 or -19.99",
+                "char - stores single characters, such as 'a' or 'B'. Char values are surrounded by single quotes",
+                "boolean - stores values with two states: true or false",
+                "To create a variable, you must specify the type and assign it a value: type variable = value; e.g. http://tpcg.io/riDyQoue",
+                "The println() method is often used to display variables. e.g. http://tpcg.io/Q6FewAjX"
+            ]
+        }
+    },
+    {
+        "level": "java_basics",
+        "name": "data types",
+        "content": {
+            "description": [
+                "data types",
+                "A variable must be a specified data type, Data types are divided into two groups:",
+                "1.Primitive data types - includes byte, short, int, long, float, double, boolean and char",
+                "2.Non-primitive data types - such as String, Arrays and Classes (you will learn more about these later)",
+                "The main difference between primitive and non-primitive data types are:",
+                "1.Primitive types are predefined (already defined) in Java. Non-primitive types are created by the programmer and is not defined by Java (except for String).",
+                "2.Non-primitive types can be used to call methods to perform certain operations, while primitive types cannot.",
+                "3.A primitive type has always a value, while non-primitive types can be null.",
+                "4.A primitive type starts with a lowercase letter, while non-primitive types starts with an uppercase letter.",
+                "5.The size of a primitive type depends on the data type, while non-primitive types have all the same size."
+            ]
+        }
+    },
+    {
+        "level": "java_basics",
+        "name": "type casting",
+        "content": {
+            "description": [
+                "type casting",
+                "Type casting is when you assign a value of one primitive data type to another type.",
+                "In Java, there are two types of casting:",
+                "1.Widening Casting (automatically) - converting a smaller type to a larger type size: byte -> short -> char -> int -> long -> float -> double",
+                "2.Narrowing Casting (manually) - converting a larger type to a smaller size type: double -> float -> long -> int -> char -> short -> byte",
+                "e.g. http://tpcg.io/63yl2uEL"
+            ]
+        }
+    },
+    {
+        "level": "java_basics",
+        "name": "operators",
+        "content": {
+            "description": [
+                "operators",
+                "Operators are used to perform operations on variables and values.",
+                "Java divides the operators into the following groups:",
+                "1.Arithmetic operators 2.Assignment operators 3.Comparison operators 4.Logical operators 5.Bitwise operators"
+            ]
+        }
+    },
+    {
+        "level": "java_flow_control",
+        "name": "scanner",
+        "content": {
+            "description": [
+                "scanner",
+                "We can simply call System.out,println() to output content, but it is more difficult to get user’s input.",
+                "Let’s look at an example: http://tpcg.io/RATfJbID",
+                "The Scanner class is used to get user input, and it is found in the java.util package.",
+                "To use the Scanner class, create an object of the class and use any of the available methods found in the Scanner class documentation. In our example, we used the nextLine() method, which is used to read Strings."
+            ]
+        }
+    },
+    {
+        "level": "java_flow_control",
+        "name": "if",
+        "content": {
+            "description": [
+                "if",
+                "Use the if statement to specify a block of Java code to be executed if a condition is true.",
+                "In the example below, we test two values to find out if 20 is greater than 18. If the condition is true, print some text: http://tpcg.io/AW0BIvgR",
+                "Use the else if statement to specify a new condition if the first condition is false: http://tpcg.io/ZzBr2jPG"
+            ]
+        }
+    },
+    {
+        "level": "java_flow_control",
+        "name": "switch",
+        "content": {
+            "description": [
+                "switch",
+                "Use the switch statement to select one of many code blocks to be executed.",
+                "This is how it works:",
+                "The switch expression is evaluated once.",
+                "The value of the expression is compared with the values of each case.",
+                "If there is a match, the associated block of code is executed.",
+                "When Java reaches a break keyword, it breaks out of the switch block.",
+                "The default keyword specifies some code to run if there is no case match.",
+                "This example uses the weekday number to calculate the weekday name: http://tpcg.io/Obs384U0"
+            ]
+        }
+    },
+    {
+        "level": "java_flow_control",
+        "name": "while",
+        "content": {
+            "description": [
+                "while",
+                "Loops can execute a block of code as long as a specified condition is reached.",
+                "Loops are handy because they save time, reduce errors, and they make code more readable.",
+                "The while loop loops through a block of code as long as a specified condition is true: https://www.w3schools.com/java/tryjava.asp?filename=demo_while_loop",
+                "The do/while loop is a variant of the while loop.",
+                "This loop will execute the code block once, before checking if the condition is true, then it will repeat the loop as long as the condition is true: https://www.w3schools.com/java/tryjava.asp?filename=demo_do_while_loop"
+            ]
+        }
+    },
+    {
+        "level": "java_flow_control",
+        "name": "for",
+        "content": {
+            "description": [
+                "for",
+                "When you know exactly how many times you want to loop through a block of code, use the for loop instead of a while loop.",
+                "The example below will print the numbers 0 to 4: https://www.w3schools.com/java/tryjava.asp?filename=demo_for_loop",
+                "This example will only print even values between 0 and 10: https://www.w3schools.com/java/tryjava.asp?filename=demo_for_loop_even",
+                "There is also a \"for-each\" loop, which is used exclusively to loop through elements in an array.There is also a \"for-each\" loop, which is used exclusively to loop through elements in an array.",
+                "The following example outputs all elements in the cars array, using a \"for-each\" loop: https://www.w3schools.com/java/tryjava.asp?filename=demo_array_for_each"
+            ]
+        }
+    },
+    {
+        "level": "java_oop_basics_part1",
+        "name": "method",
+        "content": {
+            "description": [
+                "method",
+                "A method is a block of code which only runs when it is called.",
+                "You can pass data, known as parameters, into a method.",
+                "Methods are used to perform certain actions, and they are also known as functions.",
+                "Why use methods? To reuse code: define the code once, and use it many times."
+            ]
+        }
+    },
+    {
+        "level": "java_oop_basics_part1",
+        "name": "create a method",
+        "content": {
+            "description": [
+                "create a method",
+                "A method must be declared within a class.",
+                "It is defined with the name of the method, followed by parentheses ().",
+                "Java provides some pre-defined methods, such as System.out.println(), but you can also create your own methods to perform certain actions: http://tpcg.io/tnUSmM7e",
+                "myMethod() is the name of the method.",
+                "static means that the method belongs to the Main class and not an object of the Main class.",
+                "void means that this method does not have a return value."
+            ]
+        }
+    },
+    {
+        "level": "java_oop_basics_part1",
+        "name": "call a method",
+        "content": {
+            "description": [
+                "call a method",
+                "To call a method in Java, write the method's name followed by two parentheses () and a semicolon;",
+                "In the following example, myMethod() is used to print a text (the action), when it is called: https://www.w3schools.com/java/tryjava.asp?filename=demo_method",
+                "A method can also be called multiple times: https://www.w3schools.com/java/tryjava.asp?filename=demo_method_multiple"
+            ]
+        }
+    },
+    {
+        "level": "java_oop_basics_part1",
+        "name": "parameter",
+        "content": {
+            "description": [
+                "parameter",
+                "Information can be passed to methods as parameter. Parameters act as variables inside the method.",
+                "Parameters are specified after the method name, inside the parentheses. You can add as many parameters as you want, just separate them with a comma.",
+                "The following example has a method that takes a String called fname as parameter. When the method is called, we pass along a first name, which is used inside the method to print the full name: https://www.w3schools.com/java/tryjava.asp?filename=demo_method_param",
+                "You can have as many parameters as you like: https://www.w3schools.com/java/tryjava.asp?filename=demo_method_param2",
+                "The void keyword, used in the examples above, indicates that the method should not return a value.",
+                "If you want the method to return a value, you can use a primitive data type (such as int, char, etc.) instead of void, and use the return keyword inside the method: https://www.w3schools.com/java/tryjava.asp?filename=demo_method_void",
+                "You can also store the result in a variable (recommended, as it is easier to read and maintain): https://www.w3schools.com/java/tryjava.asp?filename=demo_method_void3"
+            ]
+        }
+    },
+    {
+        "level": "java_oop_basics_part1",
+        "name": "overload",
+        "content": {
+            "description": [
+                "overload",
+                "With method overloading, multiple methods can have the same name with different parameters.",
+                "In the example below, we overload the plusMethod method to work for both int and double: https://www.w3schools.com/java/tryjava.asp?filename=demo_method_overloading2"
+            ]
+        }
+    },
+    {
+        "level": "java_oop_basics_part1",
+        "name": "scope",
+        "content": {
+            "description": [
+                "scope",
+                "In Java, variables are only accessible inside the region they are created. This is called scope.",
+                "Variables declared directly inside a method are available anywhere in the method following the line of code in which they were declared: https://www.w3schools.com/java/tryjava.asp?filename=demo_scope",
+                "A block of code refers to all of the code between curly braces {}.",
+                "Variables declared inside blocks of code are only accessible by the code between the curly braces, which follows the line in which the variable was declared: https://www.w3schools.com/java/tryjava.asp?filename=demo_scope2"
+            ]
+        }
+    }
+]
