@@ -1,0 +1,36 @@
+{
+  "id": "304eb9f1-071b-4378-81c1-ec2c0278455e",
+  "parentId": "d261ef0e-3c3e-44de-a0f2-b64cfe82327f",
+  "rootParentId": "0c61a872-a78f-4cb0-9fff-16e11057f004",
+  "name": "Intent C - custom - custom",
+  "auto": true,
+  "contexts": [
+    "IntentC-custom-followup"
+  ],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "IntentC.IntentC-custom.IntentC-custom-custom",
+      "affectedContexts": [],
+      "parameters": [],
+      "messages": [
+        {
+          "type": "0",
+          "title": "",
+          "textToSpeech": "",
+          "lang": "en",
+          "condition": ""
+        }
+      ],
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": false,
+  "webhookForSlotFilling": false,
+  "fallbackIntent": false,
+  "events": [],
+  "conditionalResponses": [],
+  "condition": "",
+  "conditionalFollowupEvents": []
+}
