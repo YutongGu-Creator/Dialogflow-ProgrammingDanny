@@ -1,0 +1,9 @@
+{
+  "id": "f41c89e6-56cb-4445-aee2-892d5183f600",
+  "name": "java_knowledge",
+  "isOverridable": true,
+  "isEnum": false,
+  "isRegexp": false,
+  "automatedExpansion": false,
+  "allowFuzzyExtraction": true
+}

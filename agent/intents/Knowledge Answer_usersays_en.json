@@ -1,0 +1,190 @@
+[
+  {
+    "id": "839ecc24-5338-4a64-ae3b-5e01fb671b85",
+    "data": [
+      {
+        "text": "I don\u0027t understand ",
+        "userDefined": false
+      },
+      {
+        "text": "syntax",
+        "meta": "@java_knowledge",
+        "alias": "java_knowledge",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  },
+  {
+    "id": "f835bd4c-a6eb-4f67-90ed-c3d9bf9861e3",
+    "data": [
+      {
+        "text": "tell me about ",
+        "userDefined": false
+      },
+      {
+        "text": "syntax",
+        "meta": "@java_knowledge",
+        "alias": "java_knowledge",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  },
+  {
+    "id": "5a3448bb-a723-4d6d-9084-cf25ed9bcdc2",
+    "data": [
+      {
+        "text": "what does ",
+        "userDefined": false
+      },
+      {
+        "text": "syntax",
+        "meta": "@java_knowledge",
+        "alias": "java_knowledge",
+        "userDefined": true
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "mean",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  },
+  {
+    "id": "490c87c9-a87d-4539-be05-ceb92f355a54",
+    "data": [
+      {
+        "text": "explain ",
+        "userDefined": false
+      },
+      {
+        "text": "scanner",
+        "meta": "@java_knowledge",
+        "alias": "java_knowledge",
+        "userDefined": false
+      },
+      {
+        "text": " to me",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  },
+  {
+    "id": "16e1655a-f8a7-4d43-996d-cae49f08d7de",
+    "data": [
+      {
+        "text": "help me understand ",
+        "userDefined": false
+      },
+      {
+        "text": "scanner",
+        "meta": "@java_knowledge",
+        "alias": "java_knowledge",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  },
+  {
+    "id": "24cb0669-7f4a-4eac-9600-69d7c90cbbaf",
+    "data": [
+      {
+        "text": "can you tell me about java ",
+        "userDefined": false
+      },
+      {
+        "text": "scanner",
+        "meta": "@java_knowledge",
+        "alias": "java_knowledge",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  },
+  {
+    "id": "21505227-508b-47b4-92d7-5af9593ef47c",
+    "data": [
+      {
+        "text": "do you know what ",
+        "userDefined": false
+      },
+      {
+        "text": "syntax",
+        "meta": "@java_knowledge",
+        "alias": "java_knowledge",
+        "userDefined": true
+      },
+      {
+        "text": " are",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  },
+  {
+    "id": "04214221-e13a-4359-bbca-6ae12b09823c",
+    "data": [
+      {
+        "text": "what are java ",
+        "userDefined": false
+      },
+      {
+        "text": "comments",
+        "meta": "@java_knowledge",
+        "alias": "java_knowledge",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  },
+  {
+    "id": "8e609e95-f5ab-438a-9fc8-27e7366294bb",
+    "data": [
+      {
+        "text": "what are ",
+        "userDefined": false
+      },
+      {
+        "text": "comments",
+        "meta": "@java_knowledge",
+        "alias": "java_knowledge",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  }
+]
