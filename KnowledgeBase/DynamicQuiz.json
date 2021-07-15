@@ -1,0 +1,188 @@
+[
+    {
+        "difficulty": "beginner",
+        "content": {
+            "q0": {
+                "level": "java_basics",
+                "name": "syntax",
+                "quiz": "What is the method that is required in every JAVA programme?",
+                "a": "major()",
+                "b": "main()",
+                "c": "start()",
+                "d": "Not sure",
+                "answer": "b"
+            },
+            "q1": {
+                "level": "java_basics",
+                "name": "comments",
+                "quiz": "Which syntax means the following texts are comments?",
+                "a": "**",
+                "b": "@@",
+                "c": "//",
+                "d": "Not sure",
+                "answer": "c"
+            },
+            "q2": {
+                "level": "java_basics",
+                "name": "variable",
+                "quiz": "What type of variable is \"N1c3\"?",
+                "a": "int",
+                "b": "String",
+                "c": "char",
+                "d": "Not sure",
+                "answer": "b"
+            },
+            "q3": {
+                "level": "java_basics",
+                "name": "data types",
+                "quiz": "What type of data is is arrays?",
+                "a": "Primitive data type",
+                "b": "Non-primitive data type",
+                "c": "Both",
+                "d": "Not sure",
+                "answer": "b"
+            },
+            "q4": {
+                "level": "java_basics",
+                "name": "type casting",
+                "quiz": "Which one of the statement is correct?",
+                "a": "Type casting is when you assign a value of one primitive data type to another type",
+                "b": "Type casting is when you assign a value of one Non-primitive data type to another type",
+                "c": "Type casting is when you assign a value any data type to another type",
+                "d": "Not sure",
+                "answer": "a"
+            },
+            "q5": {
+                "level": "java_basics",
+                "name": "operators",
+                "quiz": "Which one of the statement is correct?",
+                "a": "Java does not have arithmetic operators",
+                "b": "Java does not have logical operators",
+                "c": "Java has both arithmetic and logical operators",
+                "d": "Not sure",
+                "answer": "c"
+            }
+        }
+    },
+    {
+        "difficulty": "intermediate",
+        "content": {
+            "q0": {
+                "level": "java_flow_control",
+                "name": "scanner",
+                "quiz": "What mehod is used to get user's input?",
+                "a": "Scanner()",
+                "b": "println()",
+                "c": "input()",
+                "d": "Not sure",
+                "answer": "a"
+            },
+            "q1": {
+                "level": "java_flow_control",
+                "name": "if",
+                "quiz": "Which statements execute a block a code when a condition is true?",
+                "a": "while",
+                "b": "if",
+                "c": "for",
+                "d": "Not sure",
+                "answer": "b"
+            },
+            "q2": {
+                "level": "java_flow_control",
+                "name": "switch",
+                "quiz": "What block of code is executed when no case is matched in switch?",
+                "a": "case 1",
+                "b": "break",
+                "c": "default",
+                "d": "Not sure",
+                "answer": "c"
+            },
+            "q3": {
+                "level": "java_flow_control",
+                "name": "while",
+                "quiz": "What keyword indicates a loop will be executed as long as a specific condiction is reached?",
+                "a": "while",
+                "b": "do/while",
+                "c": "if",
+                "d": "Not sure",
+                "answer": "a"
+            },
+            "q4": {
+                "level": "java_flow_control",
+                "name": "for",
+                "quiz": "What keyword do we use for looping a certain number of times?",
+                "a": "while",
+                "b": "for",
+                "c": "if",
+                "d": "Not sure",
+                "answer": "b"
+            }
+        }
+    },
+    {
+        "difficulty": "advanced",
+        "content": {
+            "q0": {
+                "level": "java_oop_basics_part1",
+                "name": "method",
+                "quiz": "Why use methods?",
+                "a": "define the code once, and use it many times",
+                "b": "define the code many times, and use it once",
+                "c": "define the code once, and use it once",
+                "d": "Not sure",
+                "answer": "a"
+            },
+            "q1": {
+                "level": "java_oop_basics_part1",
+                "name": "create a method",
+                "quiz": "Which of the following is the right way to CREATE a method?",
+                "a": "static void myMethod()",
+                "b": "public static void myMethod",
+                "c": "public static void myMethod()",
+                "d": "Not sure",
+                "answer": "c"
+            },
+            "q2": {
+                "level": "java_oop_basics_part1",
+                "name": "call a method",
+                "quiz": "Which of the following is the right way to CALL a method?",
+                "a": "myMethod()",
+                "b": "myMethod;",
+                "c": "myMethod();",
+                "d": "Not sure",
+                "answer": "c"
+            },
+            "q3": {
+                "level": "java_oop_basics_part1",
+                "name": "parameter",
+                "quiz": "In \"static void myMethod(String fname)\", what does keyword \"void\" indicate?",
+                "a": "The method should not return a value",
+                "b": "The method can reutrn any kind of value",
+                "c": "The method can only reutrn \"String\" type variable",
+                "d": "Not sure",
+                "answer": "a"
+            },
+            "q4": {
+                "level": "java_oop_basics_part1",
+                "name": "overload",
+                "quiz": "What is Method overloading?",
+                "a": "Multiple methods can have diiferent names with the same parameters",
+                "b": "Multiple methods can have the same name with different parameters",
+                "c": "Multiple methods can have the same name with the same parameters",
+                "d": "Not sure",
+                "answer": "b"
+            }
+            ,
+            "q5": {
+                "level": "java_oop_basics_part1",
+                "name": "scope",
+                "quiz": "Which statement is correct?",
+                "a": "Variabels are only accessible inside the region they are created",
+                "b": "Variabels are accessible outside the region they are created",
+                "c": "Variabels are only accessible outside the region they are created",
+                "d": "Not sure",
+                "answer": "a"
+            }
+        }
+    }
+]
