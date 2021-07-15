@@ -5,9 +5,6 @@
   "examples": "",
   "linkToDocs": "",
   "displayName": "ProgrammingDanny",
-  "activeAssistantAgents": [
-    "smalltalk-domain-on"
-  ],
   "disableInteractionLogs": false,
   "disableStackdriverLogs": true,
   "defaultTimezone": "Europe/Madrid",
