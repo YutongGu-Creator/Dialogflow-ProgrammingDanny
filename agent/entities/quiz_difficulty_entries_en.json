@@ -2,19 +2,22 @@
   {
     "value": "beginner",
     "synonyms": [
-      "Beginner"
+      "Beginner",
+      "Easy"
     ]
   },
   {
     "value": "intermediate",
     "synonyms": [
-      "Intermediate"
+      "Intermediate",
+      "Medium"
     ]
   },
   {
     "value": "advanced",
     "synonyms": [
-      "Advanced"
+      "Advanced",
+      "Hard"
     ]
   }
 ]

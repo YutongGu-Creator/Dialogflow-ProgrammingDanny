@@ -1,21 +1,20 @@
 {
-  "id": "34998118-4e8a-4299-a46b-dc5b8a1bde76",
-  "name": "Quiz Fallback",
+  "id": "e5d2a07f-9a14-43b2-9073-3ac6a99071f3",
+  "parentId": "20536492-e93f-4afb-9937-efb3312c8a6d",
+  "rootParentId": "20536492-e93f-4afb-9937-efb3312c8a6d",
+  "name": "Quiz Answer Again - Correct",
   "auto": true,
-  "contexts": [],
+  "contexts": [
+    "QuizAnswerAgain-followup"
+  ],
   "responses": [
     {
       "resetContexts": false,
-      "action": "",
-      "affectedContexts": [
-        {
-          "name": "QuizMe-followup",
-          "lifespan": 5
-        }
-      ],
+      "action": "QuizAnswerAgain.QuizAnswerAgain-custom",
+      "affectedContexts": [],
       "parameters": [
         {
-          "id": "f8b9c32e-f73d-47c4-b433-2bbfe1478aa8",
+          "id": "db952621-83f3-48e3-90c1-84eabea76f14",
           "name": "java_knowledge",
           "required": true,
           "dataType": "@java_knowledge",
@@ -36,7 +35,7 @@
           "textToSpeech": "",
           "lang": "en",
           "speech": [
-            "Quiz Fallback Timeout"
+            "Quiz Answer Again - Correct Timeout"
           ],
           "condition": ""
         }
