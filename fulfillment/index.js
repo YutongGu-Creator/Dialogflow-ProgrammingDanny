@@ -303,7 +303,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
                         else {
                             if (quizzesNotAsked.length === 0) {
                                 if (user.data().quizDifficulty === 'beginner') {
-                                    agent.add('Hi you seem like to be a newbie, you can ask me to teach you or some Java concept any time.');
+                                    agent.add('Hi you seem like to new to Java , you can ask me to teach you or some Java concept any time.');
                                 }
                                 else if (user.data().quizDifficulty === 'intermediate') {
                                     if (quizzesAsked.filter(e => beginnerQuiz.includes(e)).length != 0) {
@@ -537,7 +537,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
                         else {
                             if (quizzesNotAsked.length === 0) {
                                 if (user.data().quizDifficulty === 'beginner') {
-                                    agent.add('Hi you seem like to be a newbie, you can ask me to teach you or some Java concept any time.');
+                                    agent.add('Hi you seem like to be new to Java, you can ask me to teach you or some Java concept any time.');
                                 }
                                 else if (user.data().quizDifficulty === 'intermediate') {
                                     if (quizzesAsked.filter(e => beginnerQuiz.includes(e)).length != 0) {
@@ -1013,7 +1013,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
                 return userRef.get()
                     .then(user => {
                         if (user.data().quizDifficulty === 'beginner') {
-                            agent.add('Hi you seem like to be a newbie, you can ask me to teach you or some Java concept any time.');
+                            agent.add('Hi you seem to be new to Java, you can ask me to teach you or some Java concept any time.');
                         }
                         else if (user.data().quizDifficulty === 'intermediate') {
                             agent.add('Let\'s go to beginner level.');
@@ -1177,7 +1177,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
                             allKnowledge = allKnowledge.concat(sectionPriority[chapterPriority[i]]);
                         }
                         // get rid of correct quizzes and taught knowledge
-                        const knowledgeKnown = user.data().quizRight.concat(user.data().knowledgeTaught);
+                        const knowledgeKnown = user.data().quizRight.concat(user.data().knowledgeTaught).concat(user.data().quizAnswerAgainCorrect);
                         const knowledgeToTeach = allKnowledge.filter(e => !knowledgeKnown.includes(e));
                         if (knowledgeToTeach.length === 0) {
                             agent.add('Congrats, you have finished all the knowledge we have to offer for now.');
@@ -1187,7 +1187,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
                                 .then(doc => {
                                     const updateK = updateKnowledge(usr.data.id, knowledgeToTeach[0]);
 
-                                    // Give knowledge
+                                    // Print out the knowledge
                                     doc.data().description.forEach(d => { agent.add(d) });
                                     agent.add(new Payload(agent.FACEBOOK, nextButtonPayload, { rawPayload: false, sendAsMessage: true }));
 
@@ -1243,6 +1243,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
         });
     }
 
+    // Asking user a quiz they got wrong before
     function quizAnswerAgain(agent) {
         agent.add('quizAnswerAgain');
         // Get parameter from Dialogflow with the string to add to the database
@@ -1257,16 +1258,14 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
                         const quizWrongLength = quizWrong.length;
 
                         if (quizWrongLength === 0) {
-                            agent.add('You\'ve answer all quizzes correct!');
+                            agent.add('You don\'t have any quiz answered wrong.');
                         }
                         else {
-                            agent.add('get knowledge');
                             if (knowledge === 'beginner') {
-                                agent.add('get beginner');
                                 const quizToAsk = quizWrong.filter(e => beginnerQuiz.includes(e));
                                 const quizLength = quizToAsk.length;
                                 if (quizLength === 0) {
-                                    agent.add('You\'ve answer all the beginner difficulty quizzes correct!');
+                                    agent.add('You don\'t have any beginner difficulty quiz answered wrong.');
                                 }
                                 else {
                                     // Ask a random quiz of beginner difficulty that user got wrong before
@@ -1293,11 +1292,10 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
                                 }
                             }
                             else if (knowledge === 'intermediate') {
-                                agent.add('get intermediate');
                                 const quizToAsk = quizWrong.filter(e => intermediateQuiz.includes(e));
                                 const quizLength = quizToAsk.length;
                                 if (quizLength === 0) {
-                                    agent.add('You\'ve answer all the intermediate difficulty quizzes correct!');
+                                    agent.add('You don\'t have any intermediate difficulty quiz answered wrong.');
                                 }
                                 else {
                                     // Ask a random quiz of intermediate difficulty that user got wrong before
@@ -1324,11 +1322,10 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
                                 }
                             }
                             else if (knowledge === 'advanced') {
-                                agent.add('get advanced');
                                 const quizToAsk = quizWrong.filter(e => advancedQuiz.includes(e));
                                 const quizLength = quizToAsk.length;
                                 if (quizLength === 0) {
-                                    agent.add('You\'ve answer all the advanced difficulty quizzes correct!');
+                                    agent.add('You don\'t have any advanced difficulty quiz answered wrong.');
                                 }
                                 else {
                                     // Ask a random quiz of advanced difficulty that user got wrong before
@@ -1429,6 +1426,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
             });
     }
 
+    // Remove the quiz from user's quizWrong array and add it to quizAnswerAgainCorrect
     function quizAnswerAgainCorrect(agent) {
         const firstTimePayload = {
             text: 'That\'s correct! Would you like to answer another one?',
@@ -1479,6 +1477,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
             });
     }
 
+    // Print out the quizzes for users
     function printQuiz(quiz, quizNumber) {
         agent.add(quiz.data()[quizNumber].quiz);
         agent.add(`a. ${quiz.data()[quizNumber].a}`);
