@@ -9,18 +9,23 @@
     <script src="FileSaver.js"></script>
     <script>
         // Load data from DynamicQuiz.json
-        $.getJSON("DynamicQuiz.json", function (data) {
-            let allKnowledgeChapter = [];
-            for (let i in data) {
-                for (let j in data[i].content) {
-                    allKnowledgeChapter.push((data[i].content)[j].level);
+        $.ajax({
+            cache: false,
+            url: "DynamicQuiz.json",
+            dataType: "json",
+            success: function (data) {
+                let allKnowledgeChapter = [];
+                for (let i in data) {
+                    for (let j in data[i].content) {
+                        allKnowledgeChapter.push((data[i].content)[j].level);
+                    }
                 }
-            }
-            // Find unique elements in array allKnowledgeChapter using the Set constructor and the spread syntax
-            let uniqKnowledgeChapter = [...new Set(allKnowledgeChapter)];
-            knowledgeChapter = document.getElementById('knowledgeChapter');
-            for (let i in uniqKnowledgeChapter) {
-                knowledgeChapter.options[knowledgeChapter.options.length] = new Option(uniqKnowledgeChapter[i], uniqKnowledgeChapter[i]);
+                // Find unique elements in array allKnowledgeChapter using the Set constructor and the spread syntax
+                let uniqKnowledgeChapter = [...new Set(allKnowledgeChapter)];
+                knowledgeChapter = document.getElementById('knowledgeChapter');
+                for (let i in uniqKnowledgeChapter) {
+                    knowledgeChapter.options[knowledgeChapter.options.length] = new Option(uniqKnowledgeChapter[i], uniqKnowledgeChapter[i]);
+                }
             }
         });
     </script>
@@ -66,7 +71,6 @@
                                     // Use FileSaver to save new JSON file
                                     var blob = new Blob([newData], { type: "text/plain;charset=utf-8" });
                                     saveAs(blob, "DynamicQuiz.json");
-                                    // console.log(localStorage);
 
                                     document.getElementById('demo').innerHTML = 'Updated Successful';
                                 }
@@ -207,7 +211,7 @@
         <option value='intermediate'>intermediate</option>
         <option value='advanced'>advanced</option>
     </select><br>
-    <p>Knowledge Chapter and Knowledge Section should be in lower cases.</p>
+    <p>Don't forget to user \ before " or any special characters like that</p>
     <label>Select Knowledge Chapter Here</label><br>
     <select id='knowledgeChapter'>
     </select>

@@ -9,16 +9,21 @@
     <script src="FileSaver.js"></script>
     <script>
         // Load data from data.json
-        $.getJSON("data.json", function (data) {
-            let allKnowledgeChapter = [];
-            for (let i in data) {
-                allKnowledgeChapter.push(data[i].level);
-            }
-            // Find unique elements in array allKnowledgeChapter using the Set constructor and the spread syntax
-            let uniqKnowledgeChapter = [...new Set(allKnowledgeChapter)];
-            knowledgeChapter = document.getElementById('knowledgeChapter');
-            for (let i in uniqKnowledgeChapter) {
-                knowledgeChapter.options[knowledgeChapter.options.length] = new Option(uniqKnowledgeChapter[i], uniqKnowledgeChapter[i]);
+        $.ajax({
+            cache: false,
+            url: "DynamicQuiz.json",
+            dataType: "json",
+            success: function (data) {
+                let allKnowledgeChapter = [];
+                for (let i in data) {
+                    allKnowledgeChapter.push(data[i].level);
+                }
+                // Find unique elements in array allKnowledgeChapter using the Set constructor and the spread syntax
+                let uniqKnowledgeChapter = [...new Set(allKnowledgeChapter)];
+                knowledgeChapter = document.getElementById('knowledgeChapter');
+                for (let i in uniqKnowledgeChapter) {
+                    knowledgeChapter.options[knowledgeChapter.options.length] = new Option(uniqKnowledgeChapter[i], uniqKnowledgeChapter[i]);
+                }
             }
         });
     </script>
@@ -39,7 +44,6 @@
                         for (let i in data) {
                             allKnowledgeSection.push(data[i].name);
                         }
-
 
                         if (document.getElementById('knowledgeChapterInput').value == '') {
                             let knowledgeChapter = document.getElementById('knowledgeChapter').value;
@@ -86,7 +90,7 @@
     </script>
 
     <h1>Update Local Knowledege Base</h1>
-    <p>Knowledge Chapter and Knowledge Section should be in lower cases.</p>
+    <p>Don't forget to user \ before " or any special characters like that</p>
     <label>Select Knowledge Chapter Here</label><br>
     <select id='knowledgeChapter'>
     </select>
