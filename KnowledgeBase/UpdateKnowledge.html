@@ -29,50 +29,55 @@
         // Load data from data.json when button is clicked
         $(document).ready(function () {
             $('#update').click(function () {
-                $.getJSON("/Users/yutonggu/Downloads/data.json", function (data) {
-                    let allKnowledgeSection = [];
-                    for (let i in data) {
-                        allKnowledgeSection.push(data[i].name);
-                    }
-                    // Find unique elements in array allKnowledgeSection using the Set constructor and the spread syntax
-                    let uniqKnowledgeSection = [...new Set(allKnowledgeSection)];
+                // $.getJson doesn't work because it caches the JSON file
+                $.ajax({
+                    cache: false,
+                    url: "data.json",
+                    dataType: "json",
+                    success: function (data) {
+                        let allKnowledgeSection = [];
+                        for (let i in data) {
+                            allKnowledgeSection.push(data[i].name);
+                        }
 
-                    if (document.getElementById('knowledgeChapterInput').value == '') {
-                        let knowledgeChapter = document.getElementById('knowledgeChapter').value;
-                        let knowledgeSection = document.getElementById('knowledgeSection').value;
-                        let description = document.getElementById('description').value;
-                        let newKnowledge = { level: knowledgeChapter, name: knowledgeSection, description: description };
-                        if (uniqKnowledgeSection.includes(knowledgeSection)) {
-                            alert('This knowledge section already exist.');
+
+                        if (document.getElementById('knowledgeChapterInput').value == '') {
+                            let knowledgeChapter = document.getElementById('knowledgeChapter').value;
+                            let knowledgeSection = document.getElementById('knowledgeSection').value;
+                            let description = document.getElementById('description').value;
+                            let newKnowledge = { level: knowledgeChapter, name: knowledgeSection, description: description };
+                            if (allKnowledgeSection.includes(knowledgeSection)) {
+                                alert('This knowledge section already exist.');
+                            }
+                            else {
+                                data.push(newKnowledge);
+                                let newData = JSON.stringify(data);
+                                // Use FileSaver to save new JSON file
+                                var blob = new Blob([newData], { type: "text/plain;charset=utf-8" });
+                                saveAs(blob, "data.json");
+                                // console.log(localStorage);
+
+                                document.getElementById('demo').innerHTML = 'Updated Successful';
+                            }
                         }
                         else {
-                            data.push(newKnowledge);
-                            let newData = JSON.stringify(data);
-                            // Use FileSaver to save new JSON file
-                            var blob = new Blob([newData], { type: "text/plain;charset=utf-8" });
-                            saveAs(blob, "data.json");
-                            // console.log(localStorage);
+                            let knowledgeChapter = document.getElementById('knowledgeChapterInput').value;
+                            let knowledgeSection = document.getElementById('knowledgeSection').value;
+                            let description = document.getElementById('description').value;
+                            let newKnowledge = { level: knowledgeChapter, name: knowledgeSection, description: description };
+                            if (allKnowledgeSection.includes(knowledgeSection)) {
+                                alert('This knowledge section already exist.');
+                            }
+                            else {
+                                data.push(newKnowledge);
+                                let newData = JSON.stringify(data);
+                                // Use FileSaver to save new JSON file
+                                var blob = new Blob([newData], { type: "text/plain;charset=utf-8" });
+                                saveAs(blob, "data.json");
+                                // console.log(localStorage);
 
-                            document.getElementById('demo').innerHTML = 'Updated Successful';
-                        }
-                    }
-                    else {
-                        let knowledgeChapter = document.getElementById('knowledgeChapterInput').value;
-                        let knowledgeSection = document.getElementById('knowledgeSection').value;
-                        let description = document.getElementById('description').value;
-                        let newKnowledge = { level: knowledgeChapter, name: knowledgeSection, description: description };
-                        if (uniqKnowledgeSection.includes(knowledgeSection)) {
-                            alert('This knowledge section already exist.');
-                        }
-                        else {
-                            data.push(newKnowledge);
-                            let newData = JSON.stringify(data);
-                            // Use FileSaver to save new JSON file
-                            var blob = new Blob([newData], { type: "text/plain;charset=utf-8" });
-                            saveAs(blob, "data.json");
-                            // console.log(localStorage);
-
-                            document.getElementById('demo').innerHTML = 'Updated Successful';
+                                document.getElementById('demo').innerHTML = 'Updated Successful';
+                            }
                         }
                     }
                 });
