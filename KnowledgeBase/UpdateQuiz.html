@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>KnowledegeUpdate</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="FileSaver.js"></script>
+    <script>
+        // Load data from DynamicQuiz.json
+        $.getJSON("DynamicQuiz.json", function (data) {
+            let allKnowledgeChapter = [];
+            for (let i in data) {
+                for (let j in data[i].content) {
+                    allKnowledgeChapter.push((data[i].content)[j].level);
+                }
+            }
+            // Find unique elements in array allKnowledgeChapter using the Set constructor and the spread syntax
+            let uniqKnowledgeChapter = [...new Set(allKnowledgeChapter)];
+            knowledgeChapter = document.getElementById('knowledgeChapter');
+            for (let i in uniqKnowledgeChapter) {
+                knowledgeChapter.options[knowledgeChapter.options.length] = new Option(uniqKnowledgeChapter[i], uniqKnowledgeChapter[i]);
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <script>
+        // Load data from DynamicQuiz.json when button is clicked
+        $(document).ready(function () {
+            $('#update').click(function () {
+                $.getJSON("DynamicQuiz.json", function (data) {
+                    let allKnowledgeSection = [];
+                    for (let i in data) {
+                        for (let j in data[i].content) {
+                            allKnowledgeSection.push((data[i].content)[j].name);
+                        }
+                    }
+                    // Find unique elements in array allKnowledgeSection using the Set constructor and the spread syntax
+                    let uniqKnowledgeSection = [...new Set(allKnowledgeSection)];
+
+                    if (document.getElementById('difficulty').value == 'beginner') {
+                        if (document.getElementById('knowledgeChapterInput').value == '') {
+                            let knowledgeChapter = document.getElementById('knowledgeChapter').value;
+                            let knowledgeSection = document.getElementById('knowledgeSection').value;
+                            let quiz = document.getElementById('quiz').value;
+                            let a = document.getElementById('a').value;
+                            let b = document.getElementById('b').value;
+                            let c = document.getElementById('c').value;
+                            let answer = document.getElementById('answer').value;
+                            let quizIndex = 'q' + Object.keys(data[0].content).length;
+                            let newQuiz = { [quizIndex]: { level: knowledgeChapter, name: knowledgeSection, quiz: quiz, a: a, b: b, c: c, d: 'Not sure', answer: answer } };
+                            if (uniqKnowledgeSection.includes(knowledgeSection)) {
+                                alert('This knowledge section already exist.');
+                            }
+                            else {
+                                data[0].content = Object.assign(data[0].content, newQuiz);
+                                let newData = JSON.stringify(data);
+                                // Use FileSaver to save new JSON file
+                                var blob = new Blob([newData], { type: "text/plain;charset=utf-8" });
+                                saveAs(blob, "DynamicQuiz.json");
+                                // console.log(localStorage);
+
+                                document.getElementById('demo').innerHTML = 'Updated Successful';
+                            }
+                        }
+                        else {
+                            let knowledgeChapter = document.getElementById('knowledgeChapterInput').value;
+                            let knowledgeSection = document.getElementById('knowledgeSection').value;
+                            let quiz = document.getElementById('quiz').value;
+                            let a = document.getElementById('a').value;
+                            let b = document.getElementById('b').value;
+                            let c = document.getElementById('c').value;
+                            let answer = document.getElementById('answer').value;
+                            let quizIndex = 'q' + Object.keys(data[0].content).length;
+                            let newQuiz = { [quizIndex]: { level: knowledgeChapter, name: knowledgeSection, quiz: quiz, a: a, b: b, c: c, d: 'Not sure', answer: answer } };
+                            if (uniqKnowledgeSection.includes(knowledgeSection)) {
+                                alert('This knowledge section already exist.');
+                            }
+                            else {
+                                data[0].content = Object.assign(data[0].content, newQuiz);
+                                let newData = JSON.stringify(data);
+                                // Use FileSaver to save new JSON file
+                                var blob = new Blob([newData], { type: "text/plain;charset=utf-8" });
+                                saveAs(blob, "DynamicQuiz.json");
+                                // console.log(localStorage);
+
+                                document.getElementById('demo').innerHTML = 'Updated Successful';
+                            }
+                        }
+                    } else if (document.getElementById('difficulty').value == 'intermediate') {
+                        if (document.getElementById('knowledgeChapterInput').value == '') {
+                            let knowledgeChapter = document.getElementById('knowledgeChapter').value;
+                            let knowledgeSection = document.getElementById('knowledgeSection').value;
+                            let quiz = document.getElementById('quiz').value;
+                            let a = document.getElementById('a').value;
+                            let b = document.getElementById('b').value;
+                            let c = document.getElementById('c').value;
+                            let answer = document.getElementById('answer').value;
+                            let quizIndex = 'q' + Object.keys(data[1].content).length;
+                            let newQuiz = { [quizIndex]: { level: knowledgeChapter, name: knowledgeSection, quiz: quiz, a: a, b: b, c: c, d: 'Not sure', answer: answer } };
+                            if (uniqKnowledgeSection.includes(knowledgeSection)) {
+                                alert('This knowledge section already exist.');
+                            }
+                            else {
+                                data[1].content = Object.assign(data[1].content, newQuiz);
+                                let newData = JSON.stringify(data);
+                                // Use FileSaver to save new JSON file
+                                var blob = new Blob([newData], { type: "text/plain;charset=utf-8" });
+                                saveAs(blob, "DynamicQuiz.json");
+                                // console.log(localStorage);
+
+                                document.getElementById('demo').innerHTML = 'Updated Successful';
+                            }
+                        }
+                        else {
+                            let knowledgeChapter = document.getElementById('knowledgeChapterInput').value;
+                            let knowledgeSection = document.getElementById('knowledgeSection').value;
+                            let quiz = document.getElementById('quiz').value;
+                            let a = document.getElementById('a').value;
+                            let b = document.getElementById('b').value;
+                            let c = document.getElementById('c').value;
+                            let answer = document.getElementById('answer').value;
+                            let quizIndex = 'q' + Object.keys(data[1].content).length;
+                            let newQuiz = { [quizIndex]: { level: knowledgeChapter, name: knowledgeSection, quiz: quiz, a: a, b: b, c: c, d: 'Not sure', answer: answer } };
+                            if (uniqKnowledgeSection.includes(knowledgeSection)) {
+                                alert('This knowledge section already exist.');
+                            }
+                            else {
+                                data[1].content = Object.assign(data[1].content, newQuiz);
+                                let newData = JSON.stringify(data);
+                                // Use FileSaver to save new JSON file
+                                var blob = new Blob([newData], { type: "text/plain;charset=utf-8" });
+                                saveAs(blob, "DynamicQuiz.json");
+                                // console.log(localStorage);
+
+                                document.getElementById('demo').innerHTML = 'Updated Successful';
+                            }
+                        }
+                    } else{
+                        if (document.getElementById('knowledgeChapterInput').value == '') {
+                            let knowledgeChapter = document.getElementById('knowledgeChapter').value;
+                            let knowledgeSection = document.getElementById('knowledgeSection').value;
+                            let quiz = document.getElementById('quiz').value;
+                            let a = document.getElementById('a').value;
+                            let b = document.getElementById('b').value;
+                            let c = document.getElementById('c').value;
+                            let answer = document.getElementById('answer').value;
+                            let quizIndex = 'q' + Object.keys(data[2].content).length;
+                            let newQuiz = { [quizIndex]: { level: knowledgeChapter, name: knowledgeSection, quiz: quiz, a: a, b: b, c: c, d: 'Not sure', answer: answer } };
+                            if (uniqKnowledgeSection.includes(knowledgeSection)) {
+                                alert('This knowledge section already exist.');
+                            }
+                            else {
+                                data[2].content = Object.assign(data[2].content, newQuiz);
+                                let newData = JSON.stringify(data);
+                                // Use FileSaver to save new JSON file
+                                var blob = new Blob([newData], { type: "text/plain;charset=utf-8" });
+                                saveAs(blob, "DynamicQuiz.json");
+                                // console.log(localStorage);
+
+                                document.getElementById('demo').innerHTML = 'Updated Successful';
+                            }
+                        }
+                        else {
+                            let knowledgeChapter = document.getElementById('knowledgeChapterInput').value;
+                            let knowledgeSection = document.getElementById('knowledgeSection').value;
+                            let quiz = document.getElementById('quiz').value;
+                            let a = document.getElementById('a').value;
+                            let b = document.getElementById('b').value;
+                            let c = document.getElementById('c').value;
+                            let answer = document.getElementById('answer').value;
+                            let quizIndex = 'q' + Object.keys(data[2].content).length;
+                            let newQuiz = { [quizIndex]: { level: knowledgeChapter, name: knowledgeSection, quiz: quiz, a: a, b: b, c: c, d: 'Not sure', answer: answer } };
+                            if (uniqKnowledgeSection.includes(knowledgeSection)) {
+                                alert('This knowledge section already exist.');
+                            }
+                            else {
+                                data[2].content = Object.assign(data[2].content, newQuiz);
+                                let newData = JSON.stringify(data);
+                                // Use FileSaver to save new JSON file
+                                var blob = new Blob([newData], { type: "text/plain;charset=utf-8" });
+                                saveAs(blob, "DynamicQuiz.json");
+                                // console.log(localStorage);
+
+                                document.getElementById('demo').innerHTML = 'Updated Successful';
+                            }
+                        }
+                    }
+                });
+            })
+        })
+    </script>
+
+    <h1>Update Local Knowledege Base</h1>
+    <label>Select Difficulty Level Here</label><br>
+    <select id='difficulty'>
+        <option value='beginner'>beginner</option>
+        <option value='intermediate'>intermediate</option>
+        <option value='advanced'>advanced</option>
+    </select><br>
+    <p>Knowledge Chapter and Knowledge Section should be in lower cases.</p>
+    <label>Select Knowledge Chapter Here</label><br>
+    <select id='knowledgeChapter'>
+    </select>
+    <label>&nbsp;&nbsp;&nbsp;Or Add New Knowledge Chapter</label>
+    <input id='knowledgeChapterInput' type='text'><br>
+    <label>Enter Knowledge Section Here</label><br>
+    <input id='knowledgeSection' type='text'><br>
+    <label>Enter Quiz Here</label><br>
+    <textarea id='quiz' type='text' cols='100' rows='5'></textarea><br>
+    <label>Enter Answer A Here</label><br>
+    <textarea id='a' type='text' cols='100' rows='5'></textarea><br>
+    <label>Enter Answer A Here</label><br>
+    <textarea id='b' type='text' cols='100' rows='5'></textarea><br>
+    <label>Enter Answer C Here</label><br>
+    <textarea id='c' type='text' cols='100' rows='5'></textarea><br>
+    <label>Select Correct Answer Here</label><br>
+    <select id='answer'>
+        <option value='a'>a</option>
+        <option value='b'>b</option>
+        <option value='c'>c</option>
+    </select><br>
+    <p>Answer D Defaults As ''Not sure'</p>
+    <button type='button' id='update' href='#'> Update </button>
+    <p id='demo'></p>
+</body>
+
+</html>
