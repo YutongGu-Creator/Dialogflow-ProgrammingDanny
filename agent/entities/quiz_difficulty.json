@@ -1,9 +1,0 @@
-{
-  "id": "ca82cd6c-4fc2-4264-9b37-f473c1436272",
-  "name": "quiz_difficulty",
-  "isOverridable": true,
-  "isEnum": false,
-  "isRegexp": false,
-  "automatedExpansion": false,
-  "allowFuzzyExtraction": true
-}

@@ -1,9 +1,0 @@
-{
-  "id": "b3ad35ca-16c1-4eb6-9db1-22f1e5a34958",
-  "name": "MCQ",
-  "isOverridable": true,
-  "isEnum": false,
-  "isRegexp": false,
-  "automatedExpansion": false,
-  "allowFuzzyExtraction": false
-}
