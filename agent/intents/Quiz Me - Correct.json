@@ -1,0 +1,59 @@
+{
+  "id": "94b78cf4-4bbd-4fbb-83f2-109000f685c3",
+  "parentId": "cf951f3a-4d91-470e-a85d-bb863c7429a2",
+  "rootParentId": "cf951f3a-4d91-470e-a85d-bb863c7429a2",
+  "name": "Quiz Me - Correct",
+  "auto": true,
+  "contexts": [
+    "QuizMe-followup"
+  ],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "QuizMe.QuizMe-custom",
+      "affectedContexts": [
+        {
+          "name": "QuizMe-followup",
+          "lifespan": 5
+        }
+      ],
+      "parameters": [
+        {
+          "id": "1f9fba9f-7bff-451a-83c6-df2f8e6b5dac",
+          "name": "java_knowledge",
+          "required": true,
+          "dataType": "@java_knowledge",
+          "value": "$java_knowledge",
+          "defaultValue": "",
+          "isList": false,
+          "prompts": [],
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "outputDialogContexts": []
+        }
+      ],
+      "messages": [
+        {
+          "type": "0",
+          "title": "",
+          "textToSpeech": "",
+          "lang": "en",
+          "speech": [
+            "Quiz Me - Correct Timeout"
+          ],
+          "condition": ""
+        }
+      ],
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "fallbackIntent": false,
+  "events": [],
+  "conditionalResponses": [],
+  "condition": "",
+  "conditionalFollowupEvents": []
+}

@@ -1,0 +1,80 @@
+[
+  {
+    "id": "0a5a1b50-ef37-4cf0-8437-47ef12674747",
+    "data": [
+      {
+        "text": "quiz me",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 1,
+    "lang": "en",
+    "updated": 0
+  },
+  {
+    "id": "74532b5c-0059-432e-9860-e3e6389d49e9",
+    "data": [
+      {
+        "text": "ask me quizzes",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  },
+  {
+    "id": "0d7d6521-b5e1-4dcb-8655-f95d7aae1ee5",
+    "data": [
+      {
+        "text": "I want to answer a few questions",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  },
+  {
+    "id": "7dd1cc9a-74e9-4c62-b813-c66b78ef9df9",
+    "data": [
+      {
+        "text": "Ask me questions",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  },
+  {
+    "id": "9529765b-dcdc-46e9-a909-0902cfa38898",
+    "data": [
+      {
+        "text": "Answer questions",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  },
+  {
+    "id": "2b3a9e89-adea-4c54-8b1e-4bed5c571570",
+    "data": [
+      {
+        "text": "Let me answer some questions",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  }
+]

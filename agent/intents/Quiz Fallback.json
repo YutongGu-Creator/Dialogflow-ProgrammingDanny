@@ -1,0 +1,55 @@
+{
+  "id": "34998118-4e8a-4299-a46b-dc5b8a1bde76",
+  "name": "Quiz Fallback",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "",
+      "affectedContexts": [
+        {
+          "name": "QuizMe-followup",
+          "lifespan": 5
+        }
+      ],
+      "parameters": [
+        {
+          "id": "f8b9c32e-f73d-47c4-b433-2bbfe1478aa8",
+          "name": "java_knowledge",
+          "required": true,
+          "dataType": "@java_knowledge",
+          "value": "$java_knowledge",
+          "defaultValue": "",
+          "isList": false,
+          "prompts": [],
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "outputDialogContexts": []
+        }
+      ],
+      "messages": [
+        {
+          "type": "0",
+          "title": "",
+          "textToSpeech": "",
+          "lang": "en",
+          "speech": [
+            "Quiz Fallback Timeout"
+          ],
+          "condition": ""
+        }
+      ],
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "fallbackIntent": false,
+  "events": [],
+  "conditionalResponses": [],
+  "condition": "",
+  "conditionalFollowupEvents": []
+}

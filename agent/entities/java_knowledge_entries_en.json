@@ -1,0 +1,266 @@
+[
+  {
+    "value": "syntax",
+    "synonyms": [
+      "syntax"
+    ]
+  },
+  {
+    "value": "comments",
+    "synonyms": [
+      "comments"
+    ]
+  },
+  {
+    "value": "variable",
+    "synonyms": [
+      "variable"
+    ]
+  },
+  {
+    "value": "data types",
+    "synonyms": [
+      "data types"
+    ]
+  },
+  {
+    "value": "type casting",
+    "synonyms": [
+      "type casting"
+    ]
+  },
+  {
+    "value": "operators",
+    "synonyms": [
+      "operators"
+    ]
+  },
+  {
+    "value": "scanner",
+    "synonyms": [
+      "scanner",
+      "Input"
+    ]
+  },
+  {
+    "value": "if",
+    "synonyms": [
+      "if",
+      "if else"
+    ]
+  },
+  {
+    "value": "switch",
+    "synonyms": [
+      "switch",
+      "break",
+      "continue"
+    ]
+  },
+  {
+    "value": "while",
+    "synonyms": [
+      "while"
+    ]
+  },
+  {
+    "value": "for",
+    "synonyms": [
+      "for"
+    ]
+  },
+  {
+    "value": "scope",
+    "synonyms": [
+      "scope"
+    ]
+  },
+  {
+    "value": "overload",
+    "synonyms": [
+      "overload"
+    ]
+  },
+  {
+    "value": "parameter",
+    "synonyms": [
+      "parameter"
+    ]
+  },
+  {
+    "value": "call a method",
+    "synonyms": [
+      "call a method"
+    ]
+  },
+  {
+    "value": "create a method",
+    "synonyms": [
+      "create a method",
+      "create methods"
+    ]
+  },
+  {
+    "value": "method",
+    "synonyms": [
+      "method",
+      "function"
+    ]
+  },
+  {
+    "value": "recursion",
+    "synonyms": [
+      "recursion"
+    ]
+  },
+  {
+    "value": "class",
+    "synonyms": [
+      "class",
+      "attributes",
+      "instance",
+      "object"
+    ]
+  },
+  {
+    "value": "constructor",
+    "synonyms": [
+      "constructor"
+    ]
+  },
+  {
+    "value": "encapsulation",
+    "synonyms": [
+      "encapsulation",
+      "getter",
+      "setter"
+    ]
+  },
+  {
+    "value": "inheritance",
+    "synonyms": [
+      "inheritance",
+      "subclass",
+      "superclass",
+      "extends"
+    ]
+  },
+  {
+    "value": "polymorphism",
+    "synonyms": [
+      "polymorphism"
+    ]
+  },
+  {
+    "value": "inner classes",
+    "synonyms": [
+      "inner classes",
+      "nested classes"
+    ]
+  },
+  {
+    "value": "abstraction",
+    "synonyms": [
+      "abstraction",
+      "abstract keyword"
+    ]
+  },
+  {
+    "value": "interface",
+    "synonyms": [
+      "interface"
+    ]
+  },
+  {
+    "value": "ArrayList",
+    "synonyms": [
+      "ArrayList"
+    ]
+  },
+  {
+    "value": "LinkedList",
+    "synonyms": [
+      "LinkedList"
+    ]
+  },
+  {
+    "value": "HashMap",
+    "synonyms": [
+      "HashMap"
+    ]
+  },
+  {
+    "value": "HashSet",
+    "synonyms": [
+      "HashSet"
+    ]
+  },
+  {
+    "value": "Iterator",
+    "synonyms": [
+      "Iterator"
+    ]
+  },
+  {
+    "value": "file handling",
+    "synonyms": [
+      "file handling"
+    ]
+  },
+  {
+    "value": "create files",
+    "synonyms": [
+      "create files",
+      "write files",
+      "create a file",
+      "write a file"
+    ]
+  },
+  {
+    "value": "read files",
+    "synonyms": [
+      "read files"
+    ]
+  },
+  {
+    "value": "delete files",
+    "synonyms": [
+      "delete files"
+    ]
+  },
+  {
+    "value": "exceptions",
+    "synonyms": [
+      "exceptions"
+    ]
+  },
+  {
+    "value": "catch exceptions",
+    "synonyms": [
+      "catch exceptions",
+      "finally keyword",
+      "catch keyword"
+    ]
+  },
+  {
+    "value": "throw exceptions",
+    "synonyms": [
+      "throw exceptions",
+      "throw keyword"
+    ]
+  },
+  {
+    "value": "Modifiers",
+    "synonyms": [
+      "Modifiers",
+      "public keyword",
+      "private keyword",
+      "protected keyword",
+      "final keyword",
+      "static keyword",
+      "trasient keyword",
+      "synchronized keyword",
+      "volatile keyword"
+    ]
+  }
+]

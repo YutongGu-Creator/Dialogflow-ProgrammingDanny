@@ -1,0 +1,30 @@
+[
+  {
+    "value": "a",
+    "synonyms": [
+      "a",
+      "A"
+    ]
+  },
+  {
+    "value": "b",
+    "synonyms": [
+      "b",
+      "B"
+    ]
+  },
+  {
+    "value": "c",
+    "synonyms": [
+      "c",
+      "C"
+    ]
+  },
+  {
+    "value": "d",
+    "synonyms": [
+      "d",
+      "D"
+    ]
+  }
+]
