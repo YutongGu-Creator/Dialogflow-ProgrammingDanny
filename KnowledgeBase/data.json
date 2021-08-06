@@ -259,10 +259,8 @@
             "Modifier",
             "There are two groups of modifiers in JAVA, Access Modifiers that controls the access level and Non-Access Modifiers that do not control access level, but provides other functionality.",
             "In code \"Public class main\", \"public\" is an access modifier.",
-            "Access modifier: ",
-            "https://i.imgur.com/Tz88d8u.png",
-            "Non-access modifier: ",
-            "https://i.imgur.com/ktTe1Mp.png"
+            "Here are the description of all the JAVA modifiers: ",
+            "https://i.imgur.com/tomfapu.png"
         ]
     },
     {
