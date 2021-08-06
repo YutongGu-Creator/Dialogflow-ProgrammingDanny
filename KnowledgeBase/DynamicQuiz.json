@@ -61,13 +61,8 @@
                 "c": "Java has both arithmetic and logical operators",
                 "d": "Not sure",
                 "answer": "c"
-            }
-        }
-    },
-    {
-        "difficulty": "intermediate",
-        "content": {
-            "q0": {
+            },
+            "q6": {
                 "level": "java_flow_control",
                 "name": "scanner",
                 "quiz": "What mehod is used to get user's input?",
@@ -77,17 +72,17 @@
                 "d": "Not sure",
                 "answer": "a"
             },
-            "q1": {
+            "q7": {
                 "level": "java_flow_control",
                 "name": "if",
-                "quiz": "Which statements execute a block a code when a condition is true?",
+                "quiz": "Which statements only execute a block a code when a condition is true?",
                 "a": "while",
                 "b": "if",
                 "c": "for",
                 "d": "Not sure",
                 "answer": "b"
             },
-            "q2": {
+            "q8": {
                 "level": "java_flow_control",
                 "name": "switch",
                 "quiz": "What block of code is executed when no case is matched in switch?",
@@ -97,7 +92,7 @@
                 "d": "Not sure",
                 "answer": "c"
             },
-            "q3": {
+            "q9": {
                 "level": "java_flow_control",
                 "name": "while",
                 "quiz": "What keyword indicates a loop will be executed as long as a specific condiction is reached?",
@@ -107,10 +102,10 @@
                 "d": "Not sure",
                 "answer": "a"
             },
-            "q4": {
+            "q10": {
                 "level": "java_flow_control",
                 "name": "for",
-                "quiz": "What keyword do we use for looping a certain number of times?",
+                "quiz": "What keyword do we use when we know exactly how many times we want to loop through a block of code?",
                 "a": "while",
                 "b": "for",
                 "c": "if",
@@ -120,7 +115,7 @@
         }
     },
     {
-        "difficulty": "advanced",
+        "difficulty": "intermediate",
         "content": {
             "q0": {
                 "level": "java_oop_basics_part1",
@@ -171,8 +166,7 @@
                 "c": "Multiple methods can have the same name with the same parameters",
                 "d": "Not sure",
                 "answer": "b"
-            }
-            ,
+            },
             "q5": {
                 "level": "java_oop_basics_part1",
                 "name": "scope",
@@ -182,6 +176,231 @@
                 "c": "Variabels are only accessible outside the region they are created",
                 "d": "Not sure",
                 "answer": "a"
+            },
+            "q6": {
+                "level": "java_oop_basics_part1",
+                "name": "recursion",
+                "quiz": "What is the output of public static void main(String[] args) {\n int result = sum(10); \n System.out.println(result); \n } \n  public static int sum(int k) { \n if (k > 0) { \n return k + sum(k - 1); \n } else { \n return 0; \n } \n }",
+                "a": "50",
+                "b": "55",
+                "c": "60",
+                "d": "Not sure",
+                "answer": "b"
+            },
+            "q7": {
+                "level": "java_oop_basics_part2",
+                "name": "class",
+                "quiz": "Which is the right way to create a Person class called Mike?",
+                "a": "Person mike = Person();",
+                "b": "Person Person = new Mike();",
+                "c": "Person mike = new Person();",
+                "d": "Not sure",
+                "answer": "c"
+            },
+            "q8": {
+                "level": "java_oop_basics_part2",
+                "name": "constructor",
+                "quiz": "When is a constructor of a class called?",
+                "a": "when an object of the class is created.",
+                "b": "when an object of the class is deleted.",
+                "c": "whenever a random method the class is called.",
+                "d": "Not sure",
+                "answer": "a"
+            },
+            "q9": {
+                "level": "java_oop_basics_part2",
+                "name": "modifier",
+                "quiz": "Which modifier means the code will be accessible for all classes?",
+                "a": "private",
+                "b": "protected",
+                "c": "public",
+                "d": "Not sure",
+                "answer": "c"
+            },
+            "q10": {
+                "level": "java_oop_basics_part2",
+                "name": "encapsulation",
+                "quiz": "To encapsulate sensitive data, we need to declare variables as?",
+                "a": "private",
+                "b": "protected",
+                "c": "public",
+                "d": "Not sure",
+                "answer": "a"
+            },
+            "q11": {
+                "level": "java_oop_basics_part2",
+                "name": "inheritance",
+                "quiz": "What keyword is used for inheriting from another class?",
+                "a": "abstract",
+                "b": "extends",
+                "c": "implements",
+                "d": "Not sure",
+                "answer": "b"
+            },
+            "q12": {
+                "level": "java_oop_basics_part2",
+                "name": "polymorphism",
+                "quiz": "Which one of the statements is true?",
+                "a": "Polymorphism can only be achieved by method overriding.",
+                "b": "Polymorphism can be achieved by method overriding and method overloading.",
+                "c": "Polymorphism can only be achieved by method overloading.",
+                "d": "Not sure",
+                "answer": "b"
+            },
+            "q13": {
+                "level": "java_oop_basics_part2",
+                "name": "inner classes",
+                "quiz": "Which one of the statements is true?",
+                "a": "Inner classes cannot access attributes and methods of the outer class.",
+                "b": "An inner class cannot be static.",
+                "c": "An inner class can be private or protected.",
+                "d": "Not sure",
+                "answer": "c"
+            },
+            "q14": {
+                "level": "java_oop_basics_part2",
+                "name": "abstraction",
+                "quiz": "Which one of the statements is true?",
+                "a": "Abstract class is a restricted class that cannot be used to create objects.",
+                "b": "An abstract class can only have regular methods.",
+                "c": "An abstract class can only have abstract methods.",
+                "d": "Not sure",
+                "answer": "a"
+            },
+            "q15": {
+                "level": "java_oop_basics_part2",
+                "name": "interface",
+                "quiz": "To access the interface methods, the interface must be used by another class with what keyword?",
+                "a": "abstract",
+                "b": "extends",
+                "c": "implemented",
+                "d": "Not sure",
+                "answer": "c"
+            }
+        }
+    },
+    {
+        "difficulty": "advanced",
+        "content": {
+            "q0": {
+                "level": "error_handling",
+                "name": "exceptions",
+                "quiz": "What's the output of this program? https://www.w3schools.com/java/tryjava.asp?filename=demo_try_catch",
+                "a": "myNumbers[10]",
+                "b": "10",
+                "c": "Something went wrong.",
+                "d": "Not sure",
+                "answer": "c"
+            },
+            "q1": {
+                "level": "error_handling",
+                "name": "catch exceptions",
+                "quiz": "When there are multiple catch blocks after one try block, what will happen when that try block throws an error?",
+                "a": "Only one of them will be executed.",
+                "b": "All of them will be executed.",
+                "c": "one or more of them will be executed.",
+                "d": "Not sure",
+                "answer": "a"
+            },
+            "q2": {
+                "level": "error_handling",
+                "name": "throw exceptions",
+                "quiz": "When a function throws an exception and that function does not catch the exception, what will happen?",
+                "a": "It will not do anything.",
+                "b": "It will keep being thrown to the last function that invoked it until it is caught.",
+                "c": "It will only be thrown to the nearest function.",
+                "d": "Not sure",
+                "answer": "b"
+            },
+            "q3": {
+                "level": "collection",
+                "name": "ArrayList",
+                "quiz": "Which one the statement is true for ArrayList?",
+                "a": "The size of an ArrayList cannot be modified.",
+                "b": "push() method is used to add elements to an ArrayList.",
+                "c": "java.util.ArrayList has to be imported before ArrayList can be used.",
+                "d": "Not sure",
+                "answer": "c"
+            },
+            "q4": {
+                "level": "collection",
+                "name": "LinkedList",
+                "quiz": "Which one is the right way to create a LinkedList object ?",
+                "a": "LinkedList<String> cars = new LinkedList();",
+                "b": "LinkedList<> cars = new LinkedList<String>();",
+                "c": "LinkedList<String> cars = new LinkedList<String>();",
+                "d": "Not sure",
+                "answer": "c"
+            },
+            "q5": {
+                "level": "collection",
+                "name": "HashMap",
+                "quiz": "Which of the followings is the right way to create an HashMap object?",
+                "a": "HashMap<String, Integer> personAge = new HashMap<String, Integer>();",
+                "b": "HashMap<Integer> personAge = new HashMap<Integer>();",
+                "c": "HashMap<String, Integer> personAge = new HashMap();",
+                "d": "Not sure",
+                "answer": "a"
+            },
+            "q6": {
+                "level": "collection",
+                "name": "HashSet",
+                "quiz": "Which of the followings statement is the correct about HashSet?",
+                "a": "HashSet store items in \"key/value\" pairs.",
+                "b": "A HashSet is a collection of items where every item is unique.",
+                "c": "HashSet is found in java.util package.",
+                "d": "Not sure",
+                "answer": "c"
+            },
+            "q7": {
+                "level": "collection",
+                "name": "Iterator",
+                "quiz": "Which of the followings statement is the correct about Iterator?",
+                "a": "No packages need to be imported before using it.",
+                "b": "The iterator() method can be used to get an Iterator for any collection.",
+                "c": "The iterator() method can be used to get an Iterator for any array.",
+                "d": "Not sure",
+                "answer": "b"
+            },
+            "q8": {
+                "level": "io",
+                "name": "file handling",
+                "quiz": "Which of the followings code is accessing filename.txt which is located in the files folder at the root of the project folder?",
+                "a": "File myObj = new File(\"filename.txt\");",
+                "b": "File myObj = new File(\"files/filename.txt\"); ",
+                "c": "File myObj = new File(\"/files/filename.txt\");",
+                "d": "Not sure",
+                "answer": "b"
+            },
+            "q9": {
+                "level": "io",
+                "name": "create files",
+                "quiz": "What exception is thrown when a a file has failed to be created?",
+                "a": "StackOverflowError",
+                "b": "RuntimeException",
+                "c": "IOException",
+                "d": "Not sure",
+                "answer": "c"
+            },
+            "q10": {
+                "level": "io",
+                "name": "read files",
+                "quiz": "There is a text file called test.txt that contains two words \"Hello World\", what's the output when we run this code?\nFile myObj = new File(\"files/test.txt\");\nSystem.out.println(myObj);",
+                "a": "files/test.txt",
+                "b": "test.txt",
+                "c": "Hello World",
+                "d": "Not sure",
+                "answer": "a"
+            },
+            "q11": {
+                "level": "io",
+                "name": "delete files",
+                "quiz": "What is the method used for deleting files?",
+                "a": "cancel();",
+                "b": "remove();",
+                "c": "delete();",
+                "d": "Not sure",
+                "answer": "c"
             }
         }
     }

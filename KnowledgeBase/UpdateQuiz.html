@@ -48,7 +48,6 @@
                                 allKnowledgeSection.push((data[i].content)[j].name);
                             }
                         }
-                        console.log(allKnowledgeSection);
 
                         if (document.getElementById('difficulty').value == 'beginner') {
                             if (document.getElementById('knowledgeChapterInput').value == '') {
@@ -211,7 +210,6 @@
         <option value='intermediate'>intermediate</option>
         <option value='advanced'>advanced</option>
     </select><br>
-    <p>Don't forget to user \ before " or any special characters like that</p>
     <label>Select Knowledge Chapter Here</label><br>
     <select id='knowledgeChapter'>
     </select>
@@ -223,7 +221,7 @@
     <textarea id='quiz' type='text' cols='100' rows='5'></textarea><br>
     <label>Enter Answer A Here</label><br>
     <textarea id='a' type='text' cols='100' rows='5'></textarea><br>
-    <label>Enter Answer A Here</label><br>
+    <label>Enter Answer B Here</label><br>
     <textarea id='b' type='text' cols='100' rows='5'></textarea><br>
     <label>Enter Answer C Here</label><br>
     <textarea id='c' type='text' cols='100' rows='5'></textarea><br>

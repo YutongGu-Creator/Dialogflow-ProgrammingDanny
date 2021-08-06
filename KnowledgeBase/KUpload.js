@@ -11,14 +11,13 @@ for (let i in knowledgeData) {
     // send a POST request
     axios({
         method: 'post',
-        url: '',
+        url: 'https://us-central1-programmingdanny-5a8b2.cloudfunctions.net/knowledgeUpload',
         data: {
-            level: knowledgeData[i].level,
             name: knowledgeData[i].name,
-            content: knowledgeData[i].content
+            content: knowledgeData[i]
         }
     })
-        .then(() => { console.log(`${knowledgeData[i].level}'s ${knowledgeData[i].name} is updated successful`) })
+        // .then(() => { console.log(`${knowledgeData[i].level}'s ${knowledgeData[i].name} is updated successful`) })
         .catch((err => { console.log(err) }));
 }
 

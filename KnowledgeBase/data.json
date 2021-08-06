@@ -20,7 +20,7 @@
             "Comments can be used to explain Java code, and to make it more readable. It can also be used to prevent execution when testing alternative code.",
             "Single-line comments start with two forward slashes (//). Any text between // and the end of the line is ignored by Java (will not be executed).",
             "Multi-line comments start with /* and ends with */. Any text between /* and */ will be ignored by Java.",
-            "Here are the examples http://tpcg.io/Q6FewAjX"
+            "Here is an example: http://tpcg.io/Q6FewAjX"
         ]
     },
     {
@@ -295,6 +295,7 @@
             "Polymorphism",
             "Polymorphism means \"many forms\", and it occurs when we have many classes that are related to each other by inheritance.",
             "Inheritance lets us inherit attributes and methods from another class. Polymorphism uses those methods to perform different tasks. This allows us to perform a single action in different ways.",
+            "Polymorphism can be achieved by method overriding and method overloading.",
             "For example, think of a superclass called Animal that has a method called animalSound().",
             "Subclasses of Animals could be Pigs, Cats, Dogs, Birds - And they also have their own implementation of an animal sound (the pig oinks, and the cat meows, etc.).",
             "Now we can create Pig and Dog objects and call the animalSound() method on both of them: ",
@@ -364,7 +365,7 @@
         "description": [
             "Catch Exceptions",
             "Any exception that might be thrown by a code block in JAVA can be caught by try … catch.",
-            "There can be more than one catch block but only of them will be executed:",
+            "There can be more than one catch block but only one of them will be executed:",
             "http://tpcg.io/PsiSwQwm",
             "When there are multiple catch blocks, it is very important to put certain blocks in front of others.",
             "e.g. UnsupportedEncodingExcetion will never be caught if it is put after IOException because it is inherited from IOException:",
@@ -379,7 +380,7 @@
         "name": "throw exceptions",
         "description": [
             "Throw Exceptions",
-            "When a function throws an exception and that function does not catch the exception, it will be thrown to the function that invoked it until it is caught:",
+            "When a function throws an exception and that function does not catch the exception, it will keep being thrown to the last function that invoked it until it is caught:",
             "http://tpcg.io/MDnuTMHb",
             "We can also DIY our own exceptions to throw, normally we use a BaseException and then extends to suitable exceptions based on it:",
             "http://tpcg.io/RNDi0MYY"
@@ -504,7 +505,9 @@
             "The File class from the java.io package, allows us to work with files.",
             "To use the File class, create an object of the class, and specify the filename or directory name:",
             "import java.io.File;  // Import the File class",
-            "File myObj = new File(\"filename.txt\"); // Specify the filename"
+            "File myObj = new File(\"filename.txt\"); // filename.txt is located at the root of the project folder",
+            "File myObj = new File(\"files/filename.txt\"); // filename.txt is located in the files folder at the root of the project folder",
+            "File myObj = new File(\"/files/filename.txt\"); // filename.txt is located in the files folder at the root of the current system"
         ]
     },
     {
