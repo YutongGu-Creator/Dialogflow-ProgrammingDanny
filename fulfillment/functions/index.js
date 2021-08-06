@@ -442,7 +442,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
 
     // Update when a user answers a quiz right
     function quizMeCorrect(agent) {
-        agent.add('quizMeCorrect');
+        // agent.add('quizMeCorrect');
         // Get the name of the quiz user answered correct
         const knowledge = agent.parameters.java_knowledge;
 
@@ -674,7 +674,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
 
     // Update when a user answers a quiz wrong
     function quizFallback(agent) {
-        agent.add('quizFallback');
+        // agent.add('quizFallback');
         // Get parameter from Dialogflow with the string to add to the database
         const knowledge = agent.parameters.java_knowledge;
         return axios.get(url)
@@ -1272,7 +1272,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
 
     // Asking user a quiz they got wrong before
     function quizAnswerAgain(agent) {
-        agent.add('quizAnswerAgain');
+        // agent.add('quizAnswerAgain');
         // Get parameter from Dialogflow with the string to add to the database
         const knowledge = agent.parameters.quiz_difficulty;
 
@@ -1285,7 +1285,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
                         const quizWrongLength = quizWrong.length;
 
                         if (quizWrongLength === 0) {
-                            agent.add('You don\'t have any quiz answered wrong.');
+                            agent.add('You don\'t have any quiz answered wrong at the moment.👍');
                         }
                         else {
                             if (knowledge === 'beginner') {
