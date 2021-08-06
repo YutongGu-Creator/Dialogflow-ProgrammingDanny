@@ -250,9 +250,9 @@
     ]
   },
   {
-    "value": "Modifiers",
+    "value": "modifier",
     "synonyms": [
-      "Modifiers",
+      "modifier",
       "public keyword",
       "private keyword",
       "protected keyword",
