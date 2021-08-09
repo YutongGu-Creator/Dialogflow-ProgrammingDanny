@@ -1,4 +1,4 @@
-**ProgrammingDanny is a chatbot I created with the goal of helping people learn JAVA.**
+**ProgrammingDanny is a chatbot I created with the goal of helping people learn Java.**
 
 The core of the chatbot is to use a series of quizzes to dynamically profile a user.
 
