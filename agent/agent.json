@@ -10,6 +10,20 @@
   ],
   "disableInteractionLogs": false,
   "disableStackdriverLogs": true,
+  "googleAssistant": {
+    "googleAssistantCompatible": false,
+    "project": "",
+    "welcomeIntentSignInRequired": false,
+    "startIntents": [],
+    "systemIntents": [],
+    "endIntentIds": [],
+    "voiceType": "VOICE_TYPE_UNSPECIFIED",
+    "capabilities": [],
+    "env": "",
+    "protocolVersion": "PROTOCOL_VERSION_UNSPECIFIED",
+    "autoPreviewEnabled": false,
+    "isDeviceAgent": false
+  },
   "defaultTimezone": "Europe/Madrid",
   "webhook": {
     "url": "https://us-central1-programmingdanny-5a8b2.cloudfunctions.net/dialogflowFirebaseFulfillment",

@@ -142,7 +142,11 @@
       "inheritance",
       "subclass",
       "superclass",
-      "extends"
+      "extends",
+      "child class",
+      "parent class",
+      "sub class",
+      "super class"
     ]
   },
   {
@@ -231,7 +235,8 @@
   {
     "value": "exceptions",
     "synonyms": [
-      "exceptions"
+      "exceptions",
+      "exception"
     ]
   },
   {
@@ -239,14 +244,17 @@
     "synonyms": [
       "catch exceptions",
       "finally keyword",
-      "catch keyword"
+      "catch keyword",
+      "catch an exception"
     ]
   },
   {
     "value": "throw exceptions",
     "synonyms": [
       "throw exceptions",
-      "throw keyword"
+      "throw keyword",
+      "throw an exception",
+      "DIY exception"
     ]
   },
   {

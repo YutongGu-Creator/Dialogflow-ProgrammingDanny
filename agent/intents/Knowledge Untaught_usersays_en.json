@@ -1,0 +1,88 @@
+[
+  {
+    "id": "99a5f6ee-1164-42f0-9a31-dd7a823552a2",
+    "data": [
+      {
+        "text": "what is the knowledge I have not learned",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  },
+  {
+    "id": "70797a0d-649a-44b4-8c09-5300b095ffee",
+    "data": [
+      {
+        "text": "all knowledge you have not taught me",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  },
+  {
+    "id": "053834d1-bfbf-4a9c-9bad-795fa85227d4",
+    "data": [
+      {
+        "text": "all the Java concepts you have not taught me",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  },
+  {
+    "id": "11a17404-fd47-44f7-b02d-5440c4ad5f3f",
+    "data": [
+      {
+        "text": "can you tell me what concepts you have  not taught me yet",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  },
+  {
+    "id": "c4bedc75-ea73-4275-bae9-255e2b0b4952",
+    "data": [
+      {
+        "text": "tell me all the knowledge I have not learned from you",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  },
+  {
+    "id": "3f681d27-2913-4f09-9c56-68597be1d76b",
+    "data": [
+      {
+        "text": "give me ",
+        "userDefined": false
+      },
+      {
+        "text": "a",
+        "userDefined": false
+      },
+      {
+        "text": " list of all the knowledge you have not taught me",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  }
+]
