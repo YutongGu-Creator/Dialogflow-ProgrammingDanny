@@ -60,10 +60,10 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
         const useCases = ' Here are the things I can do for you right now: \n \
         1. I can teach you concepts of JAVA language, start by saying something like "teach me". 🧑‍🏫\n \
         2. I can answer questions about JAVA, just ask me something like "what is abstraction". 🙋\n \
-        3. If you are not a total bignner, I can ask you a series of quesions to determine your current knwoledge level, just say something like "quiz me". 🤔\n \
+        3. If you are not a total beginner, I can ask you a series of quesions to find out what you already know, just say something like "quiz me". 🤔\n \
         4. If you answered a question incorrect, you can say something like "ask me again quiz I was incorrect" after you learnt the corresponding concept. 👌\n \
         5. You can ask about what I think your current knowledge level is at any time. 🔍\n \
-        6. I can also do some samll talks with you if you\'re ever bored. 👀';
+        6. I can also do some small talks with you if you\'re ever bored. 👀';
 
         return axios.get(url)
             .then(usr => {
@@ -81,16 +81,18 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
                         } else {
                             agent.add(`Welcome back ${usr.data.first_name}. 😀`);
                             agent.add(useCases);
+                            agent.add('You can find all the source code for this project here: https://github.com/YutongGu-Creator/Dialogflow-ProgrammingDanny')
                         }
                         return Promise.resolve('Read complete');
                     })
                     .catch((err) => {
                         console.log(err);
-                        agent.add('error reading userid')
+                        agent.add('error welcome')
                     });
             })
             .catch(err => {
                 console.log(err);
+                agent.add('error welcome')
             });
     }
 
@@ -137,11 +139,12 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
 
     // Start teaching from the very start
     function welcomeStartNew(agent) {
-        agent.add('We\'ll start from the beginnin, you can say \'start learning\' anytime to start or continue learning.');
+        agent.add('We\'ll start from the beginnin, you can say things like \'start learning\' anytime to start or continue learning.');
     }
 
     // Give quizees to determine users' knowledge level
     function welcomeAnswerQuestions(agent) {
+        agent.add('When answering a quiz please choose from one of the quick suggestions that pops up instead if typing.')
         agent.add('Please choose your starting difficulties and answer the quizzes using the buttons below.');
         agent.add('a. Beginner');
         agent.add('b. Intermediate');
@@ -215,6 +218,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
     // Used for resuming quizzing event
     function quizMe(agent) {
         // agent.add('quizMe');
+        agent.add('When answering a quiz please choose from one of the quick suggestions that pops up instead if typing.')
         return axios.get(url)
             .then(usr => {
                 const userRef = firestore.collection('user').doc(usr.data.id);
@@ -1794,6 +1798,14 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
             });
     }
 
+    // Give user a google search link when asked knowledge does not exsit in the current database 
+    function giveGoogleSuggestion(again) {
+        // Get what topic the user is looking for
+        const knowledge = agent.parameters.any;
+        agent.add(`I don't know about ${knowledge} yet, but here's a link for its google search result:`);
+        agent.add(`www.google.com/search?q=${knowledge}`);
+    }
+
     // Update when a user answers a quiz right
     function updateUserChapterCorrect(id, quiz) {
         const userRef = firestore.collection('user').doc(id);
@@ -1836,7 +1848,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
     // Write a new user's information to the database
     function writeUser(user) {
         // Set new users' quizDifficulty to the starting level
-        user.quizDifficulty = 'easy';
+        user.quizDifficulty = 'beginner';
         user.quizRight = [];
         user.quizWrong = [];
         user.knowledgeTaught = [];
@@ -1928,6 +1940,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
     intentMap.set('Show Current Level', showCurrentLevel);
     intentMap.set('Show Quiz Correct', showQuizCorrect);
     intentMap.set('Show Quiz Incorrect', showQuizIncorrect);
+    intentMap.set('Give Google Suggestion', giveGoogleSuggestion);
 
     agent.handleRequest(intentMap);
 });
