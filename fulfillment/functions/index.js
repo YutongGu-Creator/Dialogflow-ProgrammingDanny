@@ -33,6 +33,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
     const beginnerQuiz = sectionPriority.java_basics.concat(sectionPriority.java_flow_control);
     const intermediateQuiz = sectionPriority.java_oop_basics_part1.concat(sectionPriority.java_oop_basics_part2);
     const advancedQuiz = sectionPriority.error_handling.concat(sectionPriority.collection.concat(sectionPriority.io));
+    const allQuizzes = beginnerQuiz.concat(intermediateQuiz.concat(advancedQuiz));
 
     //get PSID from request
     const PSID = agent.originalRequest.payload.data.sender.id;
@@ -61,7 +62,8 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
         2. I can answer questions about JAVA, just ask me something like "what is abstraction". 🙋\n \
         3. If you are not a total bignner, I can ask you a series of quesions to determine your current knwoledge level, just say something like "quiz me". 🤔\n \
         4. If you answered a question incorrect, you can say something like "ask me again quiz I was incorrect" after you learnt the corresponding concept. 👌\n \
-        5. I can also do some samll talks with you if you\'re ever bored. 👀';
+        5. You can ask about what I think your current knowledge level is at any time. 🔍\n \
+        6. I can also do some samll talks with you if you\'re ever bored. 👀';
 
         return axios.get(url)
             .then(usr => {
@@ -212,7 +214,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
 
     // Used for resuming quizzing event
     function quizMe(agent) {
-        agent.add('quizMe');
+        // agent.add('quizMe');
         return axios.get(url)
             .then(usr => {
                 const userRef = firestore.collection('user').doc(usr.data.id);
@@ -1114,70 +1116,6 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
             });
     }
 
-    // Update when a user answers a quiz right
-    function updateUserChapterCorrect(id, quiz) {
-        const userRef = firestore.collection('user').doc(id);
-
-        return userRef.update({ quizRight: admin.firestore.FieldValue.arrayUnion(quiz) })
-            .then(() => {
-                return Promise.resolve('complete');
-            })
-            .catch(err => {
-                console.log(err);
-            });
-    }
-
-    // Update when a user answers a quiz wrong
-    function updateUserChapterIncorrect(id, quiz) {
-        const userRef = firestore.collection('user').doc(id);
-
-        return userRef.update({ quizWrong: admin.firestore.FieldValue.arrayUnion(quiz) })
-            .then(() => {
-                return Promise.resolve('complete');
-            })
-            .catch(err => {
-                console.log(err);
-            });
-    }
-
-    // Set the quick suggestion button payload 
-    function quizResolve(answer, knowledgeSection) {
-        const quizPayload = {
-            text: 'Choose an answer by clicking on one of the buttons below👇',
-            quick_replies: [
-                {
-                    content_type: 'text',
-                    title: 'a',
-                    payload: 'Quiz Fallback ' + knowledgeSection
-                }, {
-                    content_type: 'text',
-                    title: 'b',
-                    payload: 'Quiz Fallback ' + knowledgeSection
-                }, {
-                    content_type: 'text',
-                    title: 'c',
-                    payload: 'Quiz Fallback ' + knowledgeSection
-                }, {
-                    content_type: 'text',
-                    title: 'd',
-                    payload: 'Quiz Fallback ' + knowledgeSection
-                }
-            ]
-        };
-
-        if (answer === 'a') {
-            quizPayload.quick_replies[0].payload = 'correct ' + knowledgeSection;
-        } else if (answer === 'b') {
-            quizPayload.quick_replies[1].payload = 'correct ' + knowledgeSection;
-        } else if (answer === 'c') {
-            quizPayload.quick_replies[2].payload = 'correct ' + knowledgeSection;
-        } else {
-            quizPayload.quick_replies[3].payload = 'correct ' + knowledgeSection;
-        }
-
-        return quizPayload;
-    }
-
     // Give user knwoledge in the database in a predefined order
     function startTeaching(agent) {
         const nextButtonPayload = {
@@ -1234,40 +1172,6 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
                 console.log(err);
                 agent.add('error startTeaching')
             });
-    }
-
-    // Update user's knowledge level to the next section each time the startTeaching or nextTeaching intent is triggered 
-    function updateKnowledge(id, knowledgeSection) {
-        const userRef = firestore.collection('user').doc(id);
-        // Update knowledgeTaught array
-        return userRef.update({ knowledgeTaught: admin.firestore.FieldValue.arrayUnion(knowledgeSection) })
-            .then(() => {
-                return Promise.resolve('Complete');
-            })
-            .catch(err => {
-                console.log(err);
-            })
-    }
-
-    // Write a new user's information to the database
-    function writeUser(user) {
-        // Set new users' quizDifficulty to the starting level
-        user.quizDifficulty = 'easy';
-        user.quizRight = [];
-        user.quizWrong = [];
-        user.knowledgeTaught = [];
-        user.knowledgeAsked = [];
-        user.quizAnswerAgainCorrect = [];
-
-        // Get the database collection 'user' and create document with user id as name and store
-        const userRef = firestore.collection('user').doc(user.id);
-        return firestore.runTransaction(t => {
-            t.set(userRef, user);
-            // Must return a Promise in your transaction()-callback
-            return Promise.resolve('Write complete');
-        }).catch(err => {
-            console.log(err);
-        });
     }
 
     // Asking user a quiz they got wrong before
@@ -1504,6 +1408,452 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
             });
     }
 
+    // Show user all the quizzes they've been asked
+    function quizAsked(agent) {
+        // agent.add('quizAsked');
+        return axios.get(url)
+            .then(usr => {
+                const userRef = firestore.collection('user').doc(usr.data.id);
+                return userRef.get()
+                    .then(user => {
+                        const qAskedArr = user.data().quizRight.concat(user.data().quizWrong.concat(user.data().quizAnswerAgainCorrect));
+                        if (qAskedArr.length === 0) {
+                            agent.add('No quiz have been asked, to start say "quiz me"');
+                        } else {
+                            agent.add("Here are the quizzes that you have been asked.");
+                            let qAskedBeginner = ' ';
+                            let qAskedBeginnerArr = qAskedArr.filter(e => beginnerQuiz.includes(e));
+                            qAskedBeginnerArr.forEach(q => {
+                                qAskedBeginner += '"' + q + '" ';
+                            });
+                            agent.add("*Beginner Difficulty Quizzes:* " + qAskedBeginner);
+                            let qAskedIntermediate = ' ';
+                            let qAskedIntermediateArr = qAskedArr.filter(e => intermediateQuiz.includes(e));
+                            qAskedIntermediateArr.forEach(q => {
+                                qAskedIntermediate += '"' + q + '" ';
+                            });
+                            agent.add("*Intermediate Difficulty Quizzes:* " + qAskedIntermediate);
+                            let qAskedAdvanced = ' ';
+                            let qAskedAdvancedArr = qAskedArr.filter(e => advancedQuiz.includes(e));
+                            qAskedAdvancedArr.forEach(q => {
+                                qAskedAdvanced += '"' + q + '" ';
+                            });
+                            agent.add("*Advanced Difficulty Quizzes:* " + qAskedAdvanced);
+                        }
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        agent.add('error quizAsked');
+                    });
+            })
+            .catch(err => {
+                console.log(err);
+                agent.add('error quizAsked');
+            });
+    }
+
+    // Show user all the quizzes they've not been asked
+    function quizUnasked(agent) {
+        // agent.add('quizUnasked');
+        return axios.get(url)
+            .then(usr => {
+                const userRef = firestore.collection('user').doc(usr.data.id);
+                return userRef.get()
+                    .then(user => {
+                        const qAskedArr = user.data().quizRight.concat(user.data().quizWrong.concat(user.data().quizAnswerAgainCorrect));
+                        const qUnaskedArr = allQuizzes.filter(e => !qAskedArr.includes(e));
+                        if (qUnaskedArr.length === 0) {
+                            agent.add('All quizzes have been asked.');
+                        } else {
+                            agent.add("Here are the quizzes that you have not been asked.");
+                            let qAskedBeginner = ' ';
+                            let qAskedBeginnerArr = qUnaskedArr.filter(e => beginnerQuiz.includes(e));
+                            qAskedBeginnerArr.forEach(q => {
+                                qAskedBeginner += '"' + q + '" ';
+                            });
+                            agent.add("*Beginner Difficulty Quizzes:* " + qAskedBeginner);
+                            let qAskedIntermediate = ' ';
+                            let qAskedIntermediateArr = qUnaskedArr.filter(e => intermediateQuiz.includes(e));
+                            qAskedIntermediateArr.forEach(q => {
+                                qAskedIntermediate += '"' + q + '" ';
+                            });
+                            agent.add("*Intermediate Difficulty Quizzes:* " + qAskedIntermediate);
+                            let qAskedAdvanced = ' ';
+                            let qAskedAdvancedArr = qUnaskedArr.filter(e => advancedQuiz.includes(e));
+                            qAskedAdvancedArr.forEach(q => {
+                                qAskedAdvanced += '"' + q + '" ';
+                            });
+                            agent.add("*Advanced Difficulty Quizzes:* " + qAskedAdvanced);
+                        }
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        agent.add('error quizUnasked');
+                    });
+            })
+            .catch(err => {
+                console.log(err);
+                agent.add('error quizUnasked');
+            });
+    }
+
+    // Show user all the quizzes they were right about
+    function showQuizCorrect(agent) {
+        // agent.add('showQuizCorrect');
+        return axios.get(url)
+            .then(usr => {
+                const userRef = firestore.collection('user').doc(usr.data.id);
+                return userRef.get()
+                    .then(user => {
+                        const qAskedCorrectArr = user.data().quizRight;
+                        if (qAskedCorrectArr.length === 0) {
+                            agent.add('Sorry you have no record of correct quizzes.');
+                        } else {
+                            agent.add("Here are the quizzes that you were correct about the first time.");
+                            let qAskedBeginner = ' ';
+                            let qAskedBeginnerArr = qAskedCorrectArr.filter(e => beginnerQuiz.includes(e));
+                            qAskedBeginnerArr.forEach(q => {
+                                qAskedBeginner += '"' + q + '" ';
+                            });
+                            agent.add("*Beginner Difficulty Quizzes:* " + qAskedBeginner);
+                            let qAskedIntermediate = ' ';
+                            let qAskedIntermediateArr = qAskedCorrectArr.filter(e => intermediateQuiz.includes(e));
+                            qAskedIntermediateArr.forEach(q => {
+                                qAskedIntermediate += '"' + q + '" ';
+                            });
+                            agent.add("*Intermediate Difficulty Quizzes:* " + qAskedIntermediate);
+                            let qAskedAdvanced = ' ';
+                            let qAskedAdvancedArr = qAskedCorrectArr.filter(e => advancedQuiz.includes(e));
+                            qAskedAdvancedArr.forEach(q => {
+                                qAskedAdvanced += '"' + q + '" ';
+                            });
+                            agent.add("*Advanced Difficulty Quizzes:* " + qAskedAdvanced);
+                        }
+                        const qAskedAgainCorrectArr = user.data().quizAnswerAgainCorrect;
+                        if (qAskedAgainCorrectArr.length != 0) {
+                            agent.add("Here are the quizzes that you were correct after answering them again.");
+                            let qAskedBeginner = ' ';
+                            let qAskedBeginnerArr = qAskedAgainCorrectArr.filter(e => beginnerQuiz.includes(e));
+                            qAskedBeginnerArr.forEach(q => {
+                                qAskedBeginner += '"' + q + '" ';
+                            });
+                            agent.add("*Beginner Difficulty Quizzes:* " + qAskedBeginner);
+                            let qAskedIntermediate = ' ';
+                            let qAskedIntermediateArr = qAskedAgainCorrectArr.filter(e => intermediateQuiz.includes(e));
+                            qAskedIntermediateArr.forEach(q => {
+                                qAskedIntermediate += '"' + q + '" ';
+                            });
+                            agent.add("*Intermediate Difficulty Quizzes:* " + qAskedIntermediate);
+                            let qAskedAdvanced = ' ';
+                            let qAskedAdvancedArr = qAskedAgainCorrectArr.filter(e => advancedQuiz.includes(e));
+                            qAskedAdvancedArr.forEach(q => {
+                                qAskedAdvanced += '"' + q + '" ';
+                            });
+                            agent.add("*Advanced Difficulty Quizzes:* " + qAskedAdvanced);
+                        }
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        agent.add('error showQuizCorrect');
+                    });
+            })
+            .catch(err => {
+                console.log(err);
+                agent.add('error showQuizCorrect');
+            });
+    }
+
+    // Show user all the quizzes they were wrong about
+    function showQuizIncorrect(agent) {
+        // agent.add('showQuizIncorrect');
+        return axios.get(url)
+            .then(usr => {
+                const userRef = firestore.collection('user').doc(usr.data.id);
+                return userRef.get()
+                    .then(user => {
+                        const qAskedIncorrectArr = user.data().quizWrong;
+                        if (qAskedIncorrectArr.length === 0) {
+                            agent.add('Sorry you have no record of incorrect quizzes.');
+                        } else {
+                            agent.add("Here are the quizzes that you were wrong about.");
+                            let qAskedBeginner = ' ';
+                            let qAskedBeginnerArr = qAskedIncorrectArr.filter(e => beginnerQuiz.includes(e));
+                            qAskedBeginnerArr.forEach(q => {
+                                qAskedBeginner += '"' + q + '" ';
+                            });
+                            agent.add("*Beginner Difficulty Quizzes:* " + qAskedBeginner);
+                            let qAskedIntermediate = ' ';
+                            let qAskedIntermediateArr = qAskedIncorrectArr.filter(e => intermediateQuiz.includes(e));
+                            qAskedIntermediateArr.forEach(q => {
+                                qAskedIntermediate += '"' + q + '" ';
+                            });
+                            agent.add("*Intermediate Difficulty Quizzes:* " + qAskedIntermediate);
+                            let qAskedAdvanced = ' ';
+                            let qAskedAdvancedArr = qAskedIncorrectArr.filter(e => advancedQuiz.includes(e));
+                            qAskedAdvancedArr.forEach(q => {
+                                qAskedAdvanced += '"' + q + '" ';
+                            });
+                            agent.add("*Advanced Difficulty Quizzes:* " + qAskedAdvanced);
+                        }
+                        const qAskedAgainCorrectArr = user.data().quizAnswerAgainCorrect;
+                        if (qAskedAgainCorrectArr.length != 0) {
+                            agent.add("Here are the quizzes that you were correct after answering them again.");
+                            let qAskedBeginner = ' ';
+                            let qAskedBeginnerArr = qAskedAgainCorrectArr.filter(e => beginnerQuiz.includes(e));
+                            qAskedBeginnerArr.forEach(q => {
+                                qAskedBeginner += '"' + q + '" ';
+                            });
+                            agent.add("*Beginner Difficulty Quizzes:* " + qAskedBeginner);
+                            let qAskedIntermediate = ' ';
+                            let qAskedIntermediateArr = qAskedAgainCorrectArr.filter(e => intermediateQuiz.includes(e));
+                            qAskedIntermediateArr.forEach(q => {
+                                qAskedIntermediate += '"' + q + '" ';
+                            });
+                            agent.add("*Intermediate Difficulty Quizzes:* " + qAskedIntermediate);
+                            let qAskedAdvanced = ' ';
+                            let qAskedAdvancedArr = qAskedAgainCorrectArr.filter(e => advancedQuiz.includes(e));
+                            qAskedAdvancedArr.forEach(q => {
+                                qAskedAdvanced += '"' + q + '" ';
+                            });
+                            agent.add("*Advanced Difficulty Quizzes:* " + qAskedAdvanced);
+                        }
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        agent.add('error showQuizIncorrect');
+                    });
+            })
+            .catch(err => {
+                console.log(err);
+                agent.add('error showQuizIncorrect');
+            });
+    }
+
+    // Show user all the concepts they've been taught
+    function knowledgeTaught(agent) {
+        // agent.add('knowledegeTaught');
+        return axios.get(url)
+            .then(usr => {
+                const userRef = firestore.collection('user').doc(usr.data.id);
+                return userRef.get()
+                    .then(user => {
+                        const knowledgeTaughtArr = user.data().knowledgeTaught;
+                        if (knowledgeTaughtArr.length === 0) {
+                            agent.add('Hi it seems I have not taught you anything yet.');
+                        } else {
+                            agent.add("Here are the Java concepts I have taught you.");
+                            let knowledgeTaughtBeginner = ' ';
+                            let knowledgeTaughtBeginnerArr = knowledgeTaughtArr.filter(e => beginnerQuiz.includes(e));
+                            knowledgeTaughtBeginnerArr.forEach(q => {
+                                knowledgeTaughtBeginner += '"' + q + '" ';
+                            });
+                            agent.add("*Beginner Difficulty Knowledge:* " + knowledgeTaughtBeginner);
+
+                            let knowledgeTaughtIntermediate = ' ';
+                            let knowledgeTaughtIntermediateArr = knowledgeTaughtArr.filter(e => intermediateQuiz.includes(e));
+                            knowledgeTaughtIntermediateArr.forEach(q => {
+                                knowledgeTaughtIntermediate += '"' + q + '" ';
+                            });
+                            agent.add("*Intermediate Difficulty Knowledge:* " + knowledgeTaughtIntermediate);
+
+                            let knowledgeTaughtAdvanced = ' ';
+                            let knowledgeTaughtAdvancedArr = knowledgeTaughtArr.filter(e => advancedQuiz.includes(e));
+                            knowledgeTaughtAdvancedArr.forEach(q => {
+                                knowledgeTaughtAdvanced += '"' + q + '" ';
+                            });
+                            agent.add("*Advanced Difficulty Knowledge:* " + knowledgeTaughtAdvanced);
+                        }
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        agent.add('error knowledegeTaught');
+                    });
+            })
+            .catch(err => {
+                console.log(err);
+                agent.add('error knowledegeTaught');
+            });
+    }
+
+    // Show user all the concepts they've not been taught
+    function knowledgeUntaught(agent) {
+        // agent.add('knowledegeUntaught');
+        return axios.get(url)
+            .then(usr => {
+                const userRef = firestore.collection('user').doc(usr.data.id);
+                return userRef.get()
+                    .then(user => {
+                        const knowledgeTaughtArr = user.data().knowledgeTaught;
+                        const allQuizzes = beginnerQuiz.concat(intermediateQuiz.concat(advancedQuiz));
+                        const untaughtArr = allQuizzes.filter(e => !knowledgeTaughtArr.includes(e));
+                        if (untaughtArr.length === 0) {
+                            agent.add('Hi I have taught you everything I know right now.');
+                        } else {
+                            agent.add("Here are the Java concepts I have not taught you.");
+                            let knowledgeTaughtBeginner = ' ';
+                            let knowledgeTaughtBeginnerArr = untaughtArr.filter(e => beginnerQuiz.includes(e));
+                            knowledgeTaughtBeginnerArr.forEach(q => {
+                                knowledgeTaughtBeginner += '"' + q + '" ';
+                            });
+                            agent.add("*Beginner Difficulty Knowledge:* " + knowledgeTaughtBeginner);
+
+                            let knowledgeTaughtIntermediate = ' ';
+                            let knowledgeTaughtIntermediateArr = untaughtArr.filter(e => intermediateQuiz.includes(e));
+                            knowledgeTaughtIntermediateArr.forEach(q => {
+                                knowledgeTaughtIntermediate += '"' + q + '" ';
+                            });
+                            agent.add("*Intermediate Difficulty Knowledge:* " + knowledgeTaughtIntermediate);
+
+                            let knowledgeTaughtAdvanced = ' ';
+                            let knowledgeTaughtAdvancedArr = untaughtArr.filter(e => advancedQuiz.includes(e));
+                            knowledgeTaughtAdvancedArr.forEach(q => {
+                                knowledgeTaughtAdvanced += '"' + q + '" ';
+                            });
+                            agent.add("*Advanced Difficulty Knowledge:* " + knowledgeTaughtAdvanced);
+                        }
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        agent.add('error knowledgeUntaught');
+                    });
+            })
+            .catch(err => {
+                console.log(err);
+                agent.add('error knowledgeUntaught');
+            });
+    }
+
+    // Show user all the concepts the bot can teach
+    function showAllKnowledge(agent) {
+        agent.add('showAllKnowledge');
+        agent.add("Here are all the Java concepts I can teach you.");
+        let knowledgeBeginner = ' ';
+        beginnerQuiz.forEach(q => { knowledgeBeginner += '"' + q + '" '; })
+        agent.add("*Beginner Difficulty Knowledge:* " + knowledgeBeginner);
+        let knowledgeIntermediate = ' ';
+        intermediateQuiz.forEach(q => { knowledgeIntermediate += '"' + q + '" '; })
+        agent.add("*Intermediate Difficulty Knowledge:* " + knowledgeIntermediate);
+        let knowledgeAdvanced = ' ';
+        advancedQuiz.forEach(q => { knowledgeAdvanced += '"' + q + '" '; })
+        agent.add("*Advanced Difficulty Knowledge:* " + knowledgeAdvanced);
+    }
+
+    // Show user what their currect knowledge level is based on the most difficult concept they have been taught
+    function showCurrentLevel(agent) {
+        // agent.add('showCurrentLevel');
+        return axios.get(url)
+            .then(usr => {
+                const userRef = firestore.collection('user').doc(usr.data.id);
+                return userRef.get()
+                    .then(user => {
+                        if ((user.data().knowledgeTaught).length === 0) {
+                            agent.add(`It look like you are at *${user.data().quizDifficulty}* level`);
+                        }
+                        else {
+                            const mostDifficultConceptTaught = user.data().knowledgeTaught[user.data().knowledgeTaught.length - 1];
+                            if (beginnerQuiz.includes(mostDifficultConceptTaught)) {
+                                agent.add('It look like you are at *beginner* level, here are several things you can do:\n \
+                                1.You can ask me to get a list of all the Java concepts I can teach.\n \
+                                2.You can ask me about the knowledge I have taught you.\n \
+                                3.You can ask me about the knowledge I have *not* taught you.\n \
+                                4.You can ask me about the quizzes I have given you.\n \
+                                5.You can ask me about the quizzes I have *not* given you.\n \
+                                6.You can ask me about the quizzes you were *right* about.\n \
+                                6.You can ask me about the quizzes you were *wrong* about.');
+                            }
+                            else if (intermediateQuiz.includes(mostDifficultConceptTaught)) {
+                                agent.add('It look like you are at *intermediate* level, here are several things you can do:\n \
+                                1.You can ask me to get a list of all the Java concepts I can teach.\n \
+                                2.You can ask me about the knowledge I have taught you.\n \
+                                3.You can ask me about the knowledge I have *not* taught you.\n \
+                                4.You can ask me about the quizzes I have given you.\n \
+                                5.You can ask me about the quizzes I have *not* given you.\n \
+                                6.You can ask me about the quizzes you were *right* about.\n \
+                                6.You can ask me about the quizzes you were *wrong* about.');
+                            }
+                            else {
+                                agent.add('It look like you are at *advanced* level, here are several things you can do:\n \
+                                1.You can ask me to get a list of all the Java concepts I can teach.\n \
+                                2.You can ask me about the knowledge I have taught you.\n \
+                                3.You can ask me about the knowledge I have *not* taught you.\n \
+                                4.You can ask me about the quizzes I have given you.\n \
+                                5.You can ask me about the quizzes I have *not* given you.\n \
+                                6.You can ask me about the quizzes you were *right* about.\n \
+                                6.You can ask me about the quizzes you were *wrong* about.');
+                            }
+                        }
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        agent.add('error showCurrentLevel');
+                    });
+            })
+            .catch(err => {
+                console.log(err);
+                agent.add('error showCurrentLevel');
+            });
+    }
+
+    // Update when a user answers a quiz right
+    function updateUserChapterCorrect(id, quiz) {
+        const userRef = firestore.collection('user').doc(id);
+
+        return userRef.update({ quizRight: admin.firestore.FieldValue.arrayUnion(quiz) })
+            .then(() => {
+                return Promise.resolve('complete');
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+
+    // Update when a user answers a quiz wrong
+    function updateUserChapterIncorrect(id, quiz) {
+        const userRef = firestore.collection('user').doc(id);
+
+        return userRef.update({ quizWrong: admin.firestore.FieldValue.arrayUnion(quiz) })
+            .then(() => {
+                return Promise.resolve('complete');
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+
+    // Update user's knowledge level to the next section each time the startTeaching or nextTeaching intent is triggered 
+    function updateKnowledge(id, knowledgeSection) {
+        const userRef = firestore.collection('user').doc(id);
+        // Update knowledgeTaught array
+        return userRef.update({ knowledgeTaught: admin.firestore.FieldValue.arrayUnion(knowledgeSection) })
+            .then(() => {
+                return Promise.resolve('Complete');
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+
+    // Write a new user's information to the database
+    function writeUser(user) {
+        // Set new users' quizDifficulty to the starting level
+        user.quizDifficulty = 'easy';
+        user.quizRight = [];
+        user.quizWrong = [];
+        user.knowledgeTaught = [];
+        user.knowledgeAsked = [];
+        user.quizAnswerAgainCorrect = [];
+
+        // Get the database collection 'user' and create document with user id as name and store
+        const userRef = firestore.collection('user').doc(user.id);
+        return firestore.runTransaction(t => {
+            t.set(userRef, user);
+            // Must return a Promise in your transaction()-callback
+            return Promise.resolve('Write complete');
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
     // Print out the quizzes for users
     function printQuiz(quiz, quizNumber) {
         agent.add(quiz.data()[quizNumber].quiz);
@@ -1513,6 +1863,44 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
         agent.add(`d. ${quiz.data()[quizNumber].d}`);
         const quizPayload = quizResolve(quiz.data()[quizNumber].answer, quiz.data()[quizNumber].name);
         agent.add(new Payload(agent.FACEBOOK, quizPayload, { rawPayload: false, sendAsMessage: true }));
+    }
+
+    // Set the quick suggestion button payload 
+    function quizResolve(answer, knowledgeSection) {
+        const quizPayload = {
+            text: 'Choose an answer by clicking on one of the buttons below👇',
+            quick_replies: [
+                {
+                    content_type: 'text',
+                    title: 'a',
+                    payload: 'Quiz Fallback ' + knowledgeSection
+                }, {
+                    content_type: 'text',
+                    title: 'b',
+                    payload: 'Quiz Fallback ' + knowledgeSection
+                }, {
+                    content_type: 'text',
+                    title: 'c',
+                    payload: 'Quiz Fallback ' + knowledgeSection
+                }, {
+                    content_type: 'text',
+                    title: 'd',
+                    payload: 'Quiz Fallback ' + knowledgeSection
+                }
+            ]
+        };
+
+        if (answer === 'a') {
+            quizPayload.quick_replies[0].payload = 'correct ' + knowledgeSection;
+        } else if (answer === 'b') {
+            quizPayload.quick_replies[1].payload = 'correct ' + knowledgeSection;
+        } else if (answer === 'c') {
+            quizPayload.quick_replies[2].payload = 'correct ' + knowledgeSection;
+        } else {
+            quizPayload.quick_replies[3].payload = 'correct ' + knowledgeSection;
+        }
+
+        return quizPayload;
     }
 
     // Run the proper function handler based on the matched Dialogflow intent name
@@ -1532,6 +1920,14 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
     intentMap.set('Quiz Me - Last Level Yes', lastLevelYes);
     intentMap.set('Quiz Answer Again', quizAnswerAgain);
     intentMap.set('Quiz Answer Again - Correct', quizAnswerAgainCorrect);
+    intentMap.set('Quiz Asked', quizAsked);
+    intentMap.set('Quiz Unasked', quizUnasked);
+    intentMap.set('Knowledge Taught', knowledgeTaught);
+    intentMap.set('Knowledge Untaught', knowledgeUntaught);
+    intentMap.set('Show All Knowledge', showAllKnowledge);
+    intentMap.set('Show Current Level', showCurrentLevel);
+    intentMap.set('Show Quiz Correct', showQuizCorrect);
+    intentMap.set('Show Quiz Incorrect', showQuizIncorrect);
 
     agent.handleRequest(intentMap);
 });
