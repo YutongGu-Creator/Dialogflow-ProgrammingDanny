@@ -14,7 +14,7 @@ const axios = require('axios');
 // enables lib debugging statements
 process.env.DEBUG = 'dialogflow:debug';
 
-const PAGE_ACCESS_TOKEN = 'EAAeepkZBvyvcBAK0FykKKuoMNImq4TERgBQQ4szxJdkerwRm2dbzxfz2LkVEpd5aZBJP2bPZCHm7euybNU6BIQSEgdSE3UvEtIgOJoMtZBXfb6lFevoxa8Tmn22WzNigw8o8Yt31XZB0qeDZB2nnCmPBSt0wQC6SieBVONidk0N5TsFkwZBjCKy';
+const PAGE_ACCESS_TOKEN = '';
 
 exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, response) => {
     //Create an instance
