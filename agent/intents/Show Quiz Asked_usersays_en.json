@@ -1,9 +1,9 @@
 [
   {
-    "id": "99b2de2e-880f-43cd-9984-745d58cecc16",
+    "id": "7813aeb2-27a3-41e1-b6a9-5f2285e353e7",
     "data": [
       {
-        "text": "what quizzes did I get right",
+        "text": "all questions asked",
         "userDefined": false
       }
     ],
@@ -13,10 +13,10 @@
     "updated": 0
   },
   {
-    "id": "c3b88e6c-abe1-4e34-bc92-b1c4d7f50326",
+    "id": "01e927a5-8f0c-472b-9004-1c323d66246a",
     "data": [
       {
-        "text": "Quiz I answered correctly",
+        "text": "all quizzes asked",
         "userDefined": false
       }
     ],
@@ -26,10 +26,10 @@
     "updated": 0
   },
   {
-    "id": "9ea5323d-0b7a-495c-b485-ac88aa22c5c6",
+    "id": "cc4908af-2498-4f34-a15f-a2584bb2e8e7",
     "data": [
       {
-        "text": "give me a list of quizzes I was right",
+        "text": "all the questions you quizzed me",
         "userDefined": false
       }
     ],
@@ -39,10 +39,10 @@
     "updated": 0
   },
   {
-    "id": "433907a6-fc4c-486a-bd65-2971a5c06159",
+    "id": "653581e5-8f97-4be4-8fa9-d17a2218248e",
     "data": [
       {
-        "text": "how many quizzes did I get right",
+        "text": "what are all the questions I was asked",
         "userDefined": false
       }
     ],
@@ -52,10 +52,10 @@
     "updated": 0
   },
   {
-    "id": "100a4e2f-a432-4a18-a117-908578f3b909",
+    "id": "139fbd65-02db-45cc-9fbe-a76f1ac29042",
     "data": [
       {
-        "text": "show me the quizzes I was right",
+        "text": "what questions have I answered",
         "userDefined": false
       }
     ],
@@ -65,23 +65,10 @@
     "updated": 0
   },
   {
-    "id": "c12110a3-f422-4bc5-810a-2d5a8d57fb51",
+    "id": "f455dcae-0aa3-4273-8215-64ba9e406524",
     "data": [
       {
-        "text": "which are the questions I was correct about",
-        "userDefined": false
-      }
-    ],
-    "isTemplate": false,
-    "count": 0,
-    "lang": "en",
-    "updated": 0
-  },
-  {
-    "id": "77f040d7-b2d2-4a5e-93bb-b9499d4164f4",
-    "data": [
-      {
-        "text": "what quizzes was I right about",
+        "text": "what quizzes have you asked me",
         "userDefined": false
       }
     ],

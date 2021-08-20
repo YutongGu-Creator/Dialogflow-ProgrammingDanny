@@ -1,0 +1,75 @@
+[
+  {
+    "id": "e498b4f8-fbca-483c-aacd-d8514ec0b170",
+    "data": [
+      {
+        "text": "give me ",
+        "userDefined": false
+      },
+      {
+        "text": "a",
+        "userDefined": false
+      },
+      {
+        "text": " list of all the knowledge you taught me",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  },
+  {
+    "id": "bd4a7fd6-b814-4663-adf5-c3f0203bcb28",
+    "data": [
+      {
+        "text": "tell me all the knowledge I learned from you",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  },
+  {
+    "id": "09f7418c-85ae-408b-a3cb-6fa27f23a740",
+    "data": [
+      {
+        "text": "can you tell me what concepts you have taught me",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  },
+  {
+    "id": "867ab5c2-95c1-459c-ab2e-8b5c90bbf7fe",
+    "data": [
+      {
+        "text": "all the Java concepts you have taught me",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  },
+  {
+    "id": "ada40887-5a75-4f4b-9baa-7b07e67e993b",
+    "data": [
+      {
+        "text": "all knowledge you taught me",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "lang": "en",
+    "updated": 0
+  }
+]

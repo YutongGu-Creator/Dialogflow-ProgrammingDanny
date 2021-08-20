@@ -8,13 +8,20 @@
   {
     "value": "comments",
     "synonyms": [
-      "comments"
+      "comments",
+      "commenting"
     ]
   },
   {
     "value": "variable",
     "synonyms": [
-      "variable"
+      "variable",
+      "String",
+      "int",
+      "double",
+      "float",
+      "char",
+      "boolean"
     ]
   },
   {

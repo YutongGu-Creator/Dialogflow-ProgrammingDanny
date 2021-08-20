@@ -15,7 +15,7 @@
       ],
       "parameters": [
         {
-          "id": "069afb73-b00c-423e-a9bc-699f44f2ccf5",
+          "id": "aea83c8c-565d-49bf-a64b-9a25413b6ea5",
           "name": "quiz_difficulty",
           "required": false,
           "dataType": "@quiz_difficulty",
