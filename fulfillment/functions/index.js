@@ -14,18 +14,17 @@ const axios = require('axios');
 // enables lib debugging statements
 process.env.DEBUG = 'dialogflow:debug';
 
-const PAGE_ACCESS_TOKEN = '';
+const PAGE_ACCESS_TOKEN = 'EAAeepkZBvyvcBAK0FykKKuoMNImq4TERgBQQ4szxJdkerwRm2dbzxfz2LkVEpd5aZBJP2bPZCHm7euybNU6BIQSEgdSE3UvEtIgOJoMtZBXfb6lFevoxa8Tmn22WzNigw8o8Yt31XZB0qeDZB2nnCmPBSt0wQC6SieBVONidk0N5TsFkwZBjCKy';
 
 exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, response) => {
     //Create an instance
     const agent = new WebhookClient({ request, response });
 
-    const chapterPriority = ["java_basics", "java_flow_control", "java_oop_basics_part1"];
     const sectionPriority = {
         java_basics: ["syntax", "comments", "variable", "data types", "type casting", "operators"],
         java_flow_control: ["scanner", "if", "switch", "while", "for"],
         java_oop_basics_part1: ["method", "create a method", "call a method", "parameter", "overload", "scope", "recursion"],
-        java_oop_basics_part2: ["class", "constructor", "Modifiers", "encapsulation", "inheritance", "polymorphism", "inner classes", "abstraction", "interface"],
+        java_oop_basics_part2: ["class", "constructor", "modifier", "encapsulation", "inheritance", "polymorphism", "inner classes", "abstraction", "interface"],
         error_handling: ["exceptions", "catch exceptions", "throw exceptions"],
         collection: ["ArrayList", "LinkedList", "HashMap", "HashSet", "Iterator"],
         io: ["file handling", "create files", "read files", "delete files"]
@@ -58,12 +57,12 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
         };
 
         const useCases = ' Here are the things I can do for you right now: \n \
-        1. I can teach you concepts of JAVA language, start by saying something like "teach me". 🧑‍🏫\n \
-        2. I can answer questions about JAVA, just ask me something like "what is abstraction". 🙋\n \
-        3. If you are not a total beginner, I can ask you a series of quesions to find out what you already know, just say something like "quiz me". 🤔\n \
-        4. If you answered a question incorrect, you can say something like "ask me again quiz I was incorrect" after you learnt the corresponding concept. 👌\n \
-        5. You can ask about what I think your current knowledge level is at any time. 🔍\n \
-        6. I can also do some small talks with you if you\'re ever bored. 👀';
+        1. I can *teach you* concepts of JAVA language. 🧑‍🏫\n \
+        2. I can *answer questions* about JAVA. 🙋\n \
+        3. If you are not a total beginner, I can *ask you a series of quesions* to find out what you already know. 🤔\n \
+        4. You can *answer incorrect quizzes again* after you learnt that concept. 👌\n \
+        5. You can ask about what I think your *current knowledge level* is at any time. 🔍\n \
+        6. I can also do some *small talks* with you if you\'re ever bored. 👀';
 
         return axios.get(url)
             .then(usr => {
@@ -76,6 +75,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
                             agent.add(`Hello there, ${usr.data.first_name}. 😀`);
                             agent.add(`I noticed this is your first time talking to me.`);
                             agent.add(useCases);
+                            agent.add('You can find all the source code for this project here: https://github.com/YutongGu-Creator/Dialogflow-ProgrammingDanny')
                             // Send quick replies to messenger
                             agent.add(new Payload(agent.FACEBOOK, firstTimePayload, { rawPayload: false, sendAsMessage: true }));
                         } else {
@@ -105,19 +105,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
             .then(doc => {
                 // Print out knowledge to user
                 doc.data().description.forEach(d => {
-                    if (d.endsWith('.png') || d.endsWith('.jpg')) { // Send as images when ends with .png or .jpg, CAN ONLY SEND ONE payload due to API limitation
-                        const imagePayload = {
-                            "attachment": {
-                                "type": "image",
-                                "payload": {
-                                    "url": d
-                                }
-                            }
-                        };
-                        agent.add(new Payload(agent.FACEBOOK, imagePayload, { rawPayload: false, sendAsMessage: true }));
-                    } else {
-                        agent.add(d);
-                    }
+                    sendImageORText(d);
                 });
                 return axios.get(url)
                     .then(usr => {
@@ -989,7 +977,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
             });
     }
 
-    // When user chooses not to go to the next level when he has 70% of quizzes of his current level correct
+    // When user chooses not to go to the next level when he has 70% of quizzes of his current level correct or 30% incorrect
     function nextLevelNo(agent) {
         return axios.get(url)
             .then(usr => {
@@ -1122,44 +1110,44 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
 
     // Give user knwoledge in the database in a predefined order
     function startTeaching(agent) {
-        const nextButtonPayload = {
-            text: 'Please press the next button or type next to continue',
-            quick_replies: [
-                {
-                    content_type: 'text',
-                    title: 'next',
-                    payload: 'next'
-                }
-            ]
-        };
-
         return axios.get(url)
             .then(usr => {
                 const userRef = firestore.collection('user').doc(usr.data.id);
 
                 return userRef.get()
                     .then(user => {
-                        // Get the length of all sectionPriority
-                        const count = Object.keys(sectionPriority).length;
-                        let allKnowledge = [];
-                        for (let i = 0; i < count; i++) {
-                            allKnowledge = allKnowledge.concat(sectionPriority[chapterPriority[i]]);
-                        }
-                        // get rid of correct quizzes and taught knowledge
+                        // All knowledge sections excluding correct quizzes and taught knowledge
                         const knowledgeKnown = user.data().quizRight.concat(user.data().knowledgeTaught).concat(user.data().quizAnswerAgainCorrect);
-                        const knowledgeToTeach = allKnowledge.filter(e => !knowledgeKnown.includes(e));
+                        const knowledgeToTeach = allQuizzes.filter(e => !knowledgeKnown.includes(e));
                         if (knowledgeToTeach.length === 0) {
                             agent.add('Congrats, you have finished all the knowledge we have to offer for now.');
                         } else {
                             const knowledgeRef = firestore.collection('java_knowledge').doc(knowledgeToTeach[0]);
                             return knowledgeRef.get()
                                 .then(doc => {
-                                    const updateK = updateKnowledge(usr.data.id, knowledgeToTeach[0]);
+                                    // Records the concept as taught
+                                    updateKnowledge(usr.data.id, knowledgeToTeach[0]);
 
-                                    // Print out the knowledge
-                                    doc.data().description.forEach(d => { agent.add(d) });
-                                    agent.add(new Payload(agent.FACEBOOK, nextButtonPayload, { rawPayload: false, sendAsMessage: true }));
-
+                                    const description = doc.data().description;
+                                    const descriptionLength = description.length;
+                                    // Print out the concept, last sentence is sent with a quick suggestion button
+                                    for (let i in description) {
+                                        if (i < descriptionLength - 1) {
+                                            agent.add(description[i]);
+                                        } else {
+                                            const nextButtonPayload = {
+                                                text: description[i],
+                                                quick_replies: [
+                                                    {
+                                                        content_type: 'text',
+                                                        title: 'next',
+                                                        payload: 'next'
+                                                    }
+                                                ]
+                                            };
+                                            agent.add(new Payload(agent.FACEBOOK, nextButtonPayload, { rawPayload: false, sendAsMessage: true }));
+                                        }
+                                    }
                                     return Promise.resolve('complete');
                                 })
                                 .catch(err => {
@@ -1176,6 +1164,22 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
                 console.log(err);
                 agent.add('error startTeaching')
             });
+    }
+
+    function sendImageORText(description) {
+        if (description.endsWith('.png') || description.endsWith('.jpg')) {
+            const imagePayload = {
+                "attachment": {
+                    "type": "image",
+                    "payload": {
+                        "url": description
+                    }
+                }
+            };
+            return agent.add(new Payload(agent.FACEBOOK, imagePayload, { rawPayload: false, sendAsMessage: true }));
+        } else {
+            return agent.add(description);
+        }
     }
 
     // Asking user a quiz they got wrong before
@@ -1414,7 +1418,6 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
 
     // Show user all the quizzes they've been asked
     function quizAsked(agent) {
-        // agent.add('quizAsked');
         return axios.get(url)
             .then(usr => {
                 const userRef = firestore.collection('user').doc(usr.data.id);
@@ -1519,19 +1522,22 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
                             qAskedBeginnerArr.forEach(q => {
                                 qAskedBeginner += '"' + q + '" ';
                             });
-                            agent.add("*Beginner Difficulty Quizzes:* " + qAskedBeginner);
+                            if (qAskedBeginner != ' ')
+                                agent.add("*Beginner Difficulty Quizzes:* " + qAskedBeginner);
                             let qAskedIntermediate = ' ';
                             let qAskedIntermediateArr = qAskedCorrectArr.filter(e => intermediateQuiz.includes(e));
                             qAskedIntermediateArr.forEach(q => {
                                 qAskedIntermediate += '"' + q + '" ';
                             });
-                            agent.add("*Intermediate Difficulty Quizzes:* " + qAskedIntermediate);
+                            if (qAskedIntermediate != ' ')
+                                agent.add("*Intermediate Difficulty Quizzes:* " + qAskedIntermediate);
                             let qAskedAdvanced = ' ';
                             let qAskedAdvancedArr = qAskedCorrectArr.filter(e => advancedQuiz.includes(e));
                             qAskedAdvancedArr.forEach(q => {
                                 qAskedAdvanced += '"' + q + '" ';
                             });
-                            agent.add("*Advanced Difficulty Quizzes:* " + qAskedAdvanced);
+                            if (qAskedAdvanced != ' ')
+                                agent.add("*Advanced Difficulty Quizzes:* " + qAskedAdvanced);
                         }
                         const qAskedAgainCorrectArr = user.data().quizAnswerAgainCorrect;
                         if (qAskedAgainCorrectArr.length != 0) {
@@ -1541,19 +1547,22 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
                             qAskedBeginnerArr.forEach(q => {
                                 qAskedBeginner += '"' + q + '" ';
                             });
-                            agent.add("*Beginner Difficulty Quizzes:* " + qAskedBeginner);
+                            if (qAskedBeginner != ' ')
+                                agent.add("*Beginner Difficulty Quizzes:* " + qAskedBeginner);
                             let qAskedIntermediate = ' ';
                             let qAskedIntermediateArr = qAskedAgainCorrectArr.filter(e => intermediateQuiz.includes(e));
                             qAskedIntermediateArr.forEach(q => {
                                 qAskedIntermediate += '"' + q + '" ';
                             });
-                            agent.add("*Intermediate Difficulty Quizzes:* " + qAskedIntermediate);
+                            if (qAskedIntermediate != ' ')
+                                agent.add("*Intermediate Difficulty Quizzes:* " + qAskedIntermediate);
                             let qAskedAdvanced = ' ';
                             let qAskedAdvancedArr = qAskedAgainCorrectArr.filter(e => advancedQuiz.includes(e));
                             qAskedAdvancedArr.forEach(q => {
                                 qAskedAdvanced += '"' + q + '" ';
                             });
-                            agent.add("*Advanced Difficulty Quizzes:* " + qAskedAdvanced);
+                            if (qAskedAdvanced != ' ')
+                                agent.add("*Advanced Difficulty Quizzes:* " + qAskedAdvanced);
                         }
                     })
                     .catch(err => {
@@ -1585,19 +1594,22 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
                             qAskedBeginnerArr.forEach(q => {
                                 qAskedBeginner += '"' + q + '" ';
                             });
-                            agent.add("*Beginner Difficulty Quizzes:* " + qAskedBeginner);
+                            if (qAskedBeginner != ' ')
+                                agent.add("*Beginner Difficulty Quizzes:* " + qAskedBeginner);
                             let qAskedIntermediate = ' ';
                             let qAskedIntermediateArr = qAskedIncorrectArr.filter(e => intermediateQuiz.includes(e));
                             qAskedIntermediateArr.forEach(q => {
                                 qAskedIntermediate += '"' + q + '" ';
                             });
-                            agent.add("*Intermediate Difficulty Quizzes:* " + qAskedIntermediate);
+                            if (qAskedIntermediate != ' ')
+                                agent.add("*Intermediate Difficulty Quizzes:* " + qAskedIntermediate);
                             let qAskedAdvanced = ' ';
                             let qAskedAdvancedArr = qAskedIncorrectArr.filter(e => advancedQuiz.includes(e));
                             qAskedAdvancedArr.forEach(q => {
                                 qAskedAdvanced += '"' + q + '" ';
                             });
-                            agent.add("*Advanced Difficulty Quizzes:* " + qAskedAdvanced);
+                            if (qAskedAdvanced != ' ')
+                                agent.add("*Advanced Difficulty Quizzes:* " + qAskedAdvanced);
                         }
                         const qAskedAgainCorrectArr = user.data().quizAnswerAgainCorrect;
                         if (qAskedAgainCorrectArr.length != 0) {
@@ -1607,19 +1619,22 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
                             qAskedBeginnerArr.forEach(q => {
                                 qAskedBeginner += '"' + q + '" ';
                             });
-                            agent.add("*Beginner Difficulty Quizzes:* " + qAskedBeginner);
+                            if (qAskedBeginner != ' ')
+                                agent.add("*Beginner Difficulty Quizzes:* " + qAskedBeginner);
                             let qAskedIntermediate = ' ';
                             let qAskedIntermediateArr = qAskedAgainCorrectArr.filter(e => intermediateQuiz.includes(e));
                             qAskedIntermediateArr.forEach(q => {
                                 qAskedIntermediate += '"' + q + '" ';
                             });
-                            agent.add("*Intermediate Difficulty Quizzes:* " + qAskedIntermediate);
+                            if (qAskedIntermediate != ' ')
+                                agent.add("*Intermediate Difficulty Quizzes:* " + qAskedIntermediate);
                             let qAskedAdvanced = ' ';
                             let qAskedAdvancedArr = qAskedAgainCorrectArr.filter(e => advancedQuiz.includes(e));
                             qAskedAdvancedArr.forEach(q => {
                                 qAskedAdvanced += '"' + q + '" ';
                             });
-                            agent.add("*Advanced Difficulty Quizzes:* " + qAskedAdvanced);
+                            if (qAskedAdvanced != ' ')
+                                agent.add("*Advanced Difficulty Quizzes:* " + qAskedAdvanced);
                         }
                     })
                     .catch(err => {
@@ -1729,7 +1744,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
 
     // Show user all the concepts the bot can teach
     function showAllKnowledge(agent) {
-        agent.add('showAllKnowledge');
+        // agent.add('showAllKnowledge');
         agent.add("Here are all the Java concepts I can teach you.");
         let knowledgeBeginner = ' ';
         beginnerQuiz.forEach(q => { knowledgeBeginner += '"' + q + '" '; })
@@ -1745,6 +1760,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
     // Show user what their currect knowledge level is based on the most difficult concept they have been taught
     function showCurrentLevel(agent) {
         // agent.add('showCurrentLevel');
+        const showOptions = '1.I can show you a list of all the Java concepts I can teach.\n2.I can show you the concepts I have taught you.\n3.I can show you the concepts I have *not* taught you.\n4.I can show you the quizzes I have given you.\n5.I can show you the quizzes I have *not* given you.\n6.I can show you the quizzes you were *right* about.\n7.I can show you the quizzes you were *wrong* about.';
         return axios.get(url)
             .then(usr => {
                 const userRef = firestore.collection('user').doc(usr.data.id);
@@ -1756,34 +1772,16 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
                         else {
                             const mostDifficultConceptTaught = user.data().knowledgeTaught[user.data().knowledgeTaught.length - 1];
                             if (beginnerQuiz.includes(mostDifficultConceptTaught)) {
-                                agent.add('It look like you are at *beginner* level, here are several things you can do:\n \
-                                1.You can ask me to get a list of all the Java concepts I can teach.\n \
-                                2.You can ask me about the knowledge I have taught you.\n \
-                                3.You can ask me about the knowledge I have *not* taught you.\n \
-                                4.You can ask me about the quizzes I have given you.\n \
-                                5.You can ask me about the quizzes I have *not* given you.\n \
-                                6.You can ask me about the quizzes you were *right* about.\n \
-                                6.You can ask me about the quizzes you were *wrong* about.');
+                                agent.add('It look like you are at *beginner* level, here are several things you can do:');
+                                agent.add(showOptions);
                             }
                             else if (intermediateQuiz.includes(mostDifficultConceptTaught)) {
-                                agent.add('It look like you are at *intermediate* level, here are several things you can do:\n \
-                                1.You can ask me to get a list of all the Java concepts I can teach.\n \
-                                2.You can ask me about the knowledge I have taught you.\n \
-                                3.You can ask me about the knowledge I have *not* taught you.\n \
-                                4.You can ask me about the quizzes I have given you.\n \
-                                5.You can ask me about the quizzes I have *not* given you.\n \
-                                6.You can ask me about the quizzes you were *right* about.\n \
-                                6.You can ask me about the quizzes you were *wrong* about.');
+                                agent.add('It look like you are at *intermediate* level, here are several things you can do:');
+                                agent.add(showOptions);
                             }
                             else {
-                                agent.add('It look like you are at *advanced* level, here are several things you can do:\n \
-                                1.You can ask me to get a list of all the Java concepts I can teach.\n \
-                                2.You can ask me about the knowledge I have taught you.\n \
-                                3.You can ask me about the knowledge I have *not* taught you.\n \
-                                4.You can ask me about the quizzes I have given you.\n \
-                                5.You can ask me about the quizzes I have *not* given you.\n \
-                                6.You can ask me about the quizzes you were *right* about.\n \
-                                6.You can ask me about the quizzes you were *wrong* about.');
+                                agent.add('It look like you are at *advanced* level, here are several things you can do:');
+                                agent.add(showOptions);
                             }
                         }
                     })
@@ -1932,10 +1930,10 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
     intentMap.set('Quiz Me - Last Level Yes', lastLevelYes);
     intentMap.set('Quiz Answer Again', quizAnswerAgain);
     intentMap.set('Quiz Answer Again - Correct', quizAnswerAgainCorrect);
-    intentMap.set('Quiz Asked', quizAsked);
-    intentMap.set('Quiz Unasked', quizUnasked);
-    intentMap.set('Knowledge Taught', knowledgeTaught);
-    intentMap.set('Knowledge Untaught', knowledgeUntaught);
+    intentMap.set('Show Quiz Asked', quizAsked);
+    intentMap.set('Show Quiz Unasked', quizUnasked);
+    intentMap.set('Show Knowledge Taught', knowledgeTaught);
+    intentMap.set('Show Knowledge Untaught', knowledgeUntaught);
     intentMap.set('Show All Knowledge', showAllKnowledge);
     intentMap.set('Show Current Level', showCurrentLevel);
     intentMap.set('Show Quiz Correct', showQuizCorrect);
@@ -1957,18 +1955,6 @@ exports.knowledgeUpload = functions.https.onRequest(async (request, response) =>
         });
 });
 
-exports.quizUpload = functions.https.onRequest(async (request, response) => {
-    const quiz = request.body;
-    // Add or Update JAVA chapterPriority in the dataase
-    await firestore.collection("quiz").doc(quiz.name).set(quiz.content)
-        .then(() => {
-            response.send("successful")
-        })
-        .catch((err) => {
-            console.log(err)
-        });
-});
-
 exports.dynamicQuizUpload = functions.https.onRequest(async (request, response) => {
     const quiz = request.body;
     // Add or Update JAVA chapterPriority in the dataase
@@ -1980,3 +1966,4 @@ exports.dynamicQuizUpload = functions.https.onRequest(async (request, response) 
             console.log(err)
         });
 });
+
