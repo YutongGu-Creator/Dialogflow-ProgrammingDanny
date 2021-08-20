@@ -11,7 +11,7 @@
         // Load data from data.json
         $.ajax({
             cache: false,
-            url: "DynamicQuiz.json",
+            url: "data.json",
             dataType: "json",
             success: function (data) {
                 let allKnowledgeChapter = [];
@@ -89,8 +89,7 @@
         })
     </script>
 
-    <h1>Update Local Knowledege Base</h1>
-    <p>Don't forget to user \ before " or any special characters like that</p>
+    <h1>Update data.json</h1>
     <p>Don't forget to put image links into its own "", and only one picture per section is allowed due to API limitation</p>
     <p>Don't forget to update chapterPriority and sectionPriority after</p>
     <label>Select Knowledge Chapter Here</label><br>
@@ -101,7 +100,7 @@
     <label>Enter Knowledge Section Here</label><br>
     <input id='knowledgeSection' type='text'><br>
     <label>Enter Knowledge Description Here</label><br>
-    <textarea id='description' type='text' cols='100' rows='20'></textarea>><br>
+    <textarea id='description' type='text' cols='70' rows='20'></textarea>><br>
 
     <button type='button' id='update' href='#'> Update </button>
 

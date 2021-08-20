@@ -8,7 +8,7 @@ for (let i in quiz) {
     // send a POST request
     axios({
         method: 'post',
-        url: '',
+        url: 'https://us-central1-programmingdanny-5a8b2.cloudfunctions.net/dynamicQuizUpload',
         data: {
             difficulty: quiz[i].difficulty,
             content: quiz[i].content

@@ -74,16 +74,17 @@
             "Operators",
             "Operators are used to perform operations on variables and values.",
             "Java divides the operators into the following groups:",
-            "1.Arithmetic operators 2.Assignment operators 3.Comparison operators 4.Logical operators 5.Bitwise operators"
+            "1.Arithmetic operators\n 2.Assignment operators\n 3.Comparison operators\n 4.Logical operators\n 5.Bitwise operators"
         ]
     },
     {
         "level": "java_flow_control",
         "name": "scanner",
         "description": [
-            "Scanner",
+            "Input",
             "We can simply call System.out,println() to output content, but it is more difficult to get user’s input.",
             "Let’s look at an example: http://tpcg.io/RATfJbID",
+            "https://i.imgur.com/hPxO7sP.png",
             "The Scanner class is used to get user input, and it is found in the java.util package.",
             "To use the Scanner class, create an object of the class and use any of the available methods found in the Scanner class documentation. In our example, we used the nextLine() method, which is used to read Strings."
         ]
@@ -220,7 +221,6 @@
             "Every recursive function should have a halting condition, which is the condition where the function stops calling itself. In the previous example, the halting condition is when the parameter k becomes 0.",
             "It is helpful to see a variety of different examples to better understand the concept. In this example, the function adds a range of numbers between a start and an end.",
             "The halting condition for this recursive function is when end is not greater than start: ",
-            "1.Arithmetic operators 2.Assignment operators 3.Comparison operators 4.Logical operators 5.Bitwise operators",
             "https://www.w3schools.com/java/tryjava.asp?filename=demo_recursion2"
         ]
     },
@@ -355,7 +355,6 @@
             "The try statement allows you to define a block of code to be tested for errors while it is being executed.",
             "The catch statement allows you to define a block of code to be executed, if an error occurs in the try block.",
             "The try and catch keywords come in pairs:",
-            "1.Arithmetic operators 2.Assignment operators 3.Comparison operators 4.Logical operators 5.Bitwise operators",
             "https://www.w3schools.com/java/tryjava.asp?filename=demo_try_catch"
         ]
     },
