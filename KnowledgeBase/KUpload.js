@@ -6,7 +6,7 @@ for (let i in knowledgeData) {
     // send a POST request
     axios({
         method: 'post',
-        url: 'https://us-central1-programmingdanny-5a8b2.cloudfunctions.net/knowledgeUpload',
+        url: '',
         data: {
             name: knowledgeData[i].name,
             content: knowledgeData[i]
