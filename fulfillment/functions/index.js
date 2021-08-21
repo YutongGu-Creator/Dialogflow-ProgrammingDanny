@@ -227,7 +227,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
                                 }
                                 else if (user.data().quizDifficulty === 'beginner') {
                                     if (quizzesAsked.filter(e => intermediateQuiz.includes(e)).length != 0) {
-                                        agent.add('Looks like you are at the beginner level.');
+                                        agent.add('Looks like you are at the beginner level. Let\'s learn some Java programming together.');
                                     }
                                     else {
                                         agent.add('You are very good and have gotten ' + correctRate + '% of all the quizzes correct in the beginner level, let\'s go to intermediate level.');
@@ -262,7 +262,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
                                 }
                                 else {
                                     if (quizzesAsked.filter(e => advancedQuiz.includes(e)).length != 0) {
-                                        agent.add('Looks like you are at the intermediate level.');
+                                        agent.add('Looks like you are at the intermediate level. Let\'s learn some Java programming together.');
                                     }
                                     else {
                                         agent.add('You are very good and have gotten ' + correctRate + '% of all the quizzes correct in the intermediate level, let\'s go to advanced level.');
@@ -298,10 +298,10 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
                             }
                             else {
                                 if (user.data().quizDifficulty === 'beginner' && quizzesAsked.filter(e => intermediateQuiz.includes(e)).length != 0) {
-                                    agent.add('Looks like you are at the beginner level.');
+                                    agent.add('Looks like you are at the beginner level. Let\'s learn some Java programming together.');
                                 }
                                 else if (user.data().quizDifficulty === 'intermediate' && quizzesAsked.filter(e => advancedQuiz.includes(e)).length != 0) {
-                                    agent.add('Looks like you are at the intermediate level.');
+                                    agent.add('Looks like you are at the intermediate level. Let\'s learn some Java programming together.');
                                 } else {
                                     const correctRatePayload = {
                                         text: 'You are pretty good and have gotten ' + correctRate + '% of quizzes correct in this level, would you like to advance to the next level?',
@@ -328,7 +328,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
                                 }
                                 else if (user.data().quizDifficulty === 'intermediate') {
                                     if (quizzesAsked.filter(e => beginnerQuiz.includes(e)).length != 0) {
-                                        agent.add('Looks like you are at the intermediate level.');
+                                        agent.add('Looks like you are at the intermediate level. Let\'s learn some Java programming together.');
                                     }
                                     else {
                                         agent.add('I\'m sorry you have gotten ' + (100 - correctRate) + '% the quizzes wrong in the intermediate level, let\'s go to beginner level.');
@@ -363,7 +363,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
                                 }
                                 else {
                                     if (quizzesAsked.filter(e => intermediateQuiz.includes(e)).length != 0) {
-                                        agent.add('Looks like you are at the advanced level.');
+                                        agent.add('Looks like you are at the advanced level. Let\'s learn some Java programming together.');
                                     }
                                     else {
                                         agent.add('I\'m sorry you have gotten ' + (100 - correctRate) + '% the quizzes wrong in the advanced level, let\'s go to intermediate level.');
@@ -461,7 +461,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
                                 }
                                 else if (user.data().quizDifficulty === 'beginner') {
                                     if (quizzesAsked.filter(e => intermediateQuiz.includes(e)).length != 0) {
-                                        agent.add('Looks like you are at the beginner level.');
+                                        agent.add('Looks like you are at the beginner level. Let\'s learn some Java programming together.');
                                     }
                                     else {
                                         agent.add('You are very good and have gotten ' + correctRate + '% of all the quizzes correct in the beginner level, let\'s go to intermediate level.');
@@ -496,7 +496,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
                                 }
                                 else {
                                     if (quizzesAsked.filter(e => advancedQuiz.includes(e)).length != 0) {
-                                        agent.add('Looks like you are at the intermediate level.');
+                                        agent.add('Looks like you are at the intermediate level. Let\'s learn some Java programming together.');
                                     }
                                     else {
                                         agent.add('You are very good and have gotten ' + correctRate + '% of all the quizzes correct in the intermediate level, let\'s go to advanced level.');
@@ -532,10 +532,10 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
                             }
                             else {
                                 if (user.data().quizDifficulty === 'beginner' && quizzesAsked.filter(e => intermediateQuiz.includes(e)).length != 0) {
-                                    agent.add('Looks like you are at the beginner level.');
+                                    agent.add('Looks like you are at the beginner level. Let\'s learn some Java programming together.');
                                 }
                                 else if (user.data().quizDifficulty === 'intermediate' && quizzesAsked.filter(e => advancedQuiz.includes(e)).length != 0) {
-                                    agent.add('Looks like you are at the intermediate level.');
+                                    agent.add('Looks like you are at the intermediate level. Let\'s learn some Java programming together.');
                                 } else {
                                     const correctRatePayload = {
                                         text: 'You are pretty good and have gotten ' + correctRate + '% of quizzes correct in this level, would you like to advance to the next level?',
@@ -562,7 +562,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
                                 }
                                 else if (user.data().quizDifficulty === 'intermediate') {
                                     if (quizzesAsked.filter(e => beginnerQuiz.includes(e)).length != 0) {
-                                        agent.add('Looks like you are at the intermediate level.');
+                                        agent.add('Looks like you are at the intermediate level. Let\'s learn some Java programming together.');
                                     }
                                     else {
                                         agent.add('I\'m sorry you have gotten ' + (100 - correctRate) + '% the quizzes wrong in the intermediate level, let\'s go to beginner level.');
@@ -597,7 +597,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
                                 }
                                 else {
                                     if (quizzesAsked.filter(e => intermediateQuiz.includes(e)).length != 0) {
-                                        agent.add('Looks like you are at the advanced level.');
+                                        agent.add('Looks like you are at the advanced level. Let\'s learn some Java programming together.');
                                     }
                                     else {
                                         agent.add('I\'m sorry you have gotten ' + (100 - correctRate) + '% the quizzes wrong in the advanced level, let\'s go to intermediate level.');
@@ -692,7 +692,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
                                 }
                                 else if (user.data().quizDifficulty === 'intermediate') {
                                     if (quizzesAsked.filter(e => beginnerQuiz.includes(e)).length != 0) {
-                                        agent.add('Looks like you are at the intermediate level.');
+                                        agent.add('Looks like you are at the intermediate level. Let\'s learn some Java programming together.');
                                     } else {
                                         agent.add('I\'m sorry you have gotten ' + incorrectRate + '% of all the quizzes wrong in the intermediate level, let\'s go to beginner level.');
                                         return userRef.update({ quizDifficulty: 'beginner' })
@@ -726,7 +726,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
                                 }
                                 else {
                                     if (quizzesAsked.filter(e => advancedQuiz.includes(e)).length != 0) {
-                                        agent.add('Looks like you are at the advanced level.');
+                                        agent.add('Looks like you are at the advanced level. Let\'s learn some Java programming together.');
                                     } else {
                                         agent.add('I\'m sorry you have gotten ' + incorrectRate + '% of all the quizzes wrong in the advanced level, let\'s go to intermediate level.');
                                         return userRef.update({ quizDifficulty: 'intermediate' })
@@ -761,10 +761,10 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
                             }
                             else {
                                 if (user.data().quizDifficulty === 'intermediate' && quizzesAsked.filter(e => beginnerQuiz.includes(e)).length != 0) {
-                                    agent.add('Looks like you are at the intermediate level.');
+                                    agent.add('Looks like you are at the intermediate level. Let\'s learn some Java programming together.');
                                 }
                                 else if (user.data().quizDifficulty === 'advanced' && quizzesAsked.filter(e => intermediateQuiz.includes(e)).length != 0) {
-                                    agent.add('Looks like you are at the advanced level.');
+                                    agent.add('Looks like you are at the advanced level. Let\'s learn some Java programming together.');
                                 }
                                 else {
                                     const incorrectRatePayload = {
@@ -792,7 +792,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
                                 }
                                 else if (user.data().quizDifficulty === 'beginner') {
                                     if (quizzesAsked.filter(e => intermediateQuiz.includes(e)).length != 0) {
-                                        agent.add('Looks like you are at the beginner level.');
+                                        agent.add('Looks like you are at the beginner level. Let\'s learn some Java programming together.');
                                     } else {
                                         agent.add('You are very good and have gotten ' + (100 - incorrectRate) + '% the quizzes correct in the beginner level, let\'s go to intermediate level.');
                                         return userRef.update({ quizDifficulty: 'intermediate' })
@@ -826,7 +826,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
                                 }
                                 else {
                                     if (quizzesAsked.filter(e => advancedQuiz.includes(e)).length != 0) {
-                                        agent.add('Looks like you are at the intermediate level.');
+                                        agent.add('Looks like you are at the intermediate level. Let\'s learn some Java programming together.');
                                     } else {
                                         agent.add('You are very good and have gotten ' + (100 - incorrectRate) + '% the quizzes correct in the intermediate level, let\'s go to advanced level.');
                                         return userRef.update({ quizDifficulty: 'advanced' })
@@ -1164,22 +1164,6 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
                 console.log(err);
                 agent.add('error startTeaching')
             });
-    }
-
-    function sendImageORText(description) {
-        if (description.endsWith('.png') || description.endsWith('.jpg')) {
-            const imagePayload = {
-                "attachment": {
-                    "type": "image",
-                    "payload": {
-                        "url": description
-                    }
-                }
-            };
-            return agent.add(new Payload(agent.FACEBOOK, imagePayload, { rawPayload: false, sendAsMessage: true }));
-        } else {
-            return agent.add(description);
-        }
     }
 
     // Asking user a quiz they got wrong before
@@ -1797,11 +1781,28 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
     }
 
     // Give user a google search link when asked knowledge does not exsit in the current database 
-    function giveGoogleSuggestion(again) {
+    function giveGoogleSuggestion(agent) {
         // Get what topic the user is looking for
         const knowledge = agent.parameters.any;
         agent.add(`I don't know about ${knowledge} yet, but here's a link for its google search result:`);
         agent.add(`www.google.com/search?q=${knowledge}`);
+    }
+
+
+    function sendImageORText(description) {
+        if (description.endsWith('.png') || description.endsWith('.jpg')) {
+            const imagePayload = {
+                "attachment": {
+                    "type": "image",
+                    "payload": {
+                        "url": description
+                    }
+                }
+            };
+            return agent.add(new Payload(agent.FACEBOOK, imagePayload, { rawPayload: false, sendAsMessage: true }));
+        } else {
+            return agent.add(description);
+        }
     }
 
     // Update when a user answers a quiz right
