@@ -35,7 +35,7 @@
             "q3": {
                 "level": "java_basics",
                 "name": "data types",
-                "quiz": "What type of data is is arrays?",
+                "quiz": "What type of data is is array?",
                 "a": "Primitive data type",
                 "b": "Non-primitive data type",
                 "c": "Both",
@@ -171,9 +171,9 @@
                 "level": "java_oop_basics_part1",
                 "name": "scope",
                 "quiz": "Which statement is correct?",
-                "a": "Variabels are only accessible inside the region they are created",
-                "b": "Variabels are accessible outside the region they are created",
-                "c": "Variabels are only accessible outside the region they are created",
+                "a": "variables are only accessible inside the region they are created",
+                "b": "variables are accessible outside the region they are created",
+                "c": "variables are only accessible outside the region they are created",
                 "d": "Not sure",
                 "answer": "a"
             },
